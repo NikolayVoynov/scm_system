@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+
+<div class="container">
+    <h2 class="text-center text-white">Update Audit Report</h2>
+    <form method="POST"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="row">
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="department">Department</label>
+                <select id="department" class="form-control">
+                    <option value="">- Select a department -</option>
+                    <optgroup label="Department name">
+                        <option>Department</option>
+                    </optgroup>
+                </select>
+                <p class="errors alert alert-danger">
+                    Department is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="refNumber" class="text-white font-weight-bold">Reference №</label>
+                <input id="refNumber" type="text" class="form-control"
+                       placeholder="Audit ref. number"/>
+                <p  class="errors alert alert-danger">
+                    Ref. number is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="status">Status</label>
+                <select id="status" class="form-control">
+                    <option value="">- Select status of audit report -</option>
+                    <option>
+                        Status of audit report
+                    </option>
+                </select>
+                <p class="errors alert alert-danger">
+                    Audit report status is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="conclusion" class="text-white font-weight-bold">Conclusion</label>
+                <input id="conclusion" type="text" class="form-control"
+                       placeholder="Conclusion"/>
+                <p class="errors alert alert-danger">
+                    Conclusion is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="topic" class="text-white font-weight-bold">Topic</label>
+                <input id="topic" class="form-control"
+                       placeholder="Topic"/>
+                <p class="errors alert alert-danger">
+                    Topic is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="nonconformity" class="text-white font-weight-bold">Number of nonconformities</label>
+                <input id="nonconformity" type="number" min="0" max="1000" step="1"
+                       class="form-control"
+                       placeholder="Number of nonconformities"/>
+                <p class="errors alert alert-danger">
+                    Number of nonconformities is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="text-white font-weight-bold" for="description">Description</label>
+            <textarea id="description" type="textarea" class="form-control" rows="3"
+                      placeholder="Description"></textarea>
+            <p class="errors alert alert-danger">
+                Description is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label class="text-white font-weight-bold" for="evidence">Upload evidence</label>
+            <input id="evidence" type="url" class="form-control"
+                   placeholder="Upload evidence">
+            <p class="errors alert alert-danger">
+                Evidence are required.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Update Audit Report"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+</html>
