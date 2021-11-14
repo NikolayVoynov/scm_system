@@ -1,9 +1,6 @@
 package com.example.scm_system.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +13,7 @@ public class UserEntity extends BaseEntity{
     private String email;
     private RoleEntity role;
     private String companyPosition;
+    private ProfilePhotosEntity profilePhoto;
 
     public UserEntity() {
     }
@@ -74,12 +72,21 @@ public class UserEntity extends BaseEntity{
         this.role = role;
     }
 
-
+    @Column(nullable = false)
     public String getCompanyPosition() {
         return companyPosition;
     }
 
     public void setCompanyPosition(String companyPosition) {
         this.companyPosition = companyPosition;
+    }
+
+    @OneToOne
+    public ProfilePhotosEntity getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 }
