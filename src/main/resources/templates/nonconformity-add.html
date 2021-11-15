@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+
+<div class="container">
+    <h2 class="text-center text-white">Nonconformity</h2>
+    <form method="POST"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="refNumber" class="text-white font-weight-bold">Reference №</label>
+                <input id="refNumber" class="form-control"
+                       placeholder="Reference Number"/>
+                <p class="errors alert alert-danger">
+                    Reference number is required.
+                </p>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="description">Description</label>
+                <textarea id="description" type="text" class="form-control" rows="3"
+                          placeholder="Description"></textarea>
+                <p class="errors alert alert-danger">
+                    Description is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="level">Level of nonconformity</label>
+                <select id="level" class="form-control">
+                    <option value="">- Select level of nonconformity -</option>
+                    <option>
+                        Level of nonconformity
+                    </option>
+                </select>
+                <p class="errors alert alert-danger">
+                    Level of nonconformity is required.
+                </p>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="evidence">Upload evidence</label>
+                <input id="evidence" type="url" class="form-control"
+                       placeholder="Upload evidence">
+                <p class="errors alert alert-danger">
+                    Evidence are required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="auditRef" class="text-white font-weight-bold">Audit Reference №</label>
+                <input id="auditRef" class="form-control"
+                       placeholder="Audit Reference Number"/>
+                <p class="errors alert alert-danger">
+                    Audit Reference number is required.
+                </p>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="auditor">Auditor</label>
+                <input id="auditor" class="form-control"
+                       placeholder="Auditor"/>
+                <p class="errors alert alert-danger">
+                    Auditor is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="raisedDate" class="text-white font-weight-bold">Raised Date</label>
+                <input th:field="" th:errorclass="" type="datetime-local" class="form-control" id="raisedDate"
+                       name="raisedDate"/>
+                <p class="errors alert alert-danger">
+                    Date and Time, that cannot be in the future
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="closureDate" class="text-white font-weight-bold">Closure Date</label>
+                <input th:field="" th:errorclass="" type="datetime-local" class="form-control" id="closureDate"
+                       name="closureDate"/>
+                <p class="errors alert alert-danger">
+                    Date and Time, that cannot be in the past
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="status">Status</label>
+                <select id="status" class="form-control">
+                    <option value="">- Select status of nonconformity -</option>
+                    <option>
+                        Status of nonconformity
+                    </option>
+                </select>
+                <p class="errors alert alert-danger">
+                    Nonconformity status is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Submit Nonconformity"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+</html>

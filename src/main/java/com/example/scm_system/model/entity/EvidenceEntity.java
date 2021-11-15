@@ -12,6 +12,7 @@ public class EvidenceEntity extends BaseEntity{
     private String url;
     private AuditEntity audit;
     private SafetyReportEntity report;
+    private NonconformityEntity nonconformity;
 
     public EvidenceEntity() {
     }
@@ -41,5 +42,14 @@ public class EvidenceEntity extends BaseEntity{
 
     public void setReport(SafetyReportEntity report) {
         this.report = report;
+    }
+
+    @ManyToOne
+    public NonconformityEntity getNonconformity() {
+        return nonconformity;
+    }
+
+    public void setNonconformity(NonconformityEntity nonconformity) {
+        this.nonconformity = nonconformity;
     }
 }

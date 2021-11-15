@@ -1,9 +1,7 @@
 package com.example.scm_system.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "safety_report")
@@ -12,6 +10,7 @@ public class SafetyReportEntity extends BaseEntity {
     private UserEntity sendBy;
     private String topic;
     private String description;
+    private Set<EvidenceEntity> evidence;
 
     public SafetyReportEntity() {
     }
@@ -41,5 +40,14 @@ public class SafetyReportEntity extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @OneToMany
+    public Set<EvidenceEntity> getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(Set<EvidenceEntity> evidence) {
+        this.evidence = evidence;
     }
 }
