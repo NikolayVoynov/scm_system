@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<main class="p-5 align-content-center bg-blur my-register-div">
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="profile-card p-3 py-4">
+                    <!-- Profile photo -->
+                    <div class="text-center"><img src="" width="100" class="rounded-circle"></div>
+                    <!-- Personal info -->
+                    <div class="text-center mt-3" th:object="">
+                        <span class="bg-secondary p-1 px-4 rounded text-white" th:text="">Company Position</span>
+                        <h5 class="mt-4 mb-0">First name</h5>
+                        <span th:text="">First name</span>
+                        <h5 class="mt-4 mb-0">Last name</h5>
+                        <span th:text="">Last name</span>
+                        <h5 class="mt-2 mb-0">Username</h5>
+                        <span th:text="">Username</span>
+                        <h5 class="mt-2 mb-0">Company Email</h5>
+                        <span th:text="">Company Email</span>
+                        <h5 class="mt-2 mb-0">System Role</h5>
+                        <span th:text="">System Role</span>
+                        <div class="buttons">
+                            <button class="btn btn-outline-primary px-4">Back</button>
+                            <!--                            <button class="btn btn-primary px-4 ms-3">Contact</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+</html>

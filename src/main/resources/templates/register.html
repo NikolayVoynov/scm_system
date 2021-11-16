@@ -3,9 +3,8 @@
       xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 <head th:replace="fragments/commons::head"></head>
 <body>
-
+<header th:replace="fragments/commons::navigation"></header>
 <div class="page-container">
-    <header th:replace="fragments/commons::navigation"></header>
 
     <main class="content-wrap">
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Register</span></h1>
@@ -18,28 +17,33 @@
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="firstname" class="h4 mb-2">First name</label>
                 </div>
-                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="firstname" name="firstname"/>
-                <small class="invalid-feedback text-danger">First name length must be between 3 and 20 characters</small>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="firstname"
+                       name="firstname"/>
+                <small class="invalid-feedback text-danger">First name length must be between 3 and 20
+                    characters</small>
             </div>
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="firstname" class="h4 mb-2">Last name</label>
                 </div>
-                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="lastname" name="lastname"/>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="lastname"
+                       name="lastname"/>
                 <small class="invalid-feedback text-danger">Last name length must be between 3 and 20 characters</small>
             </div>
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="username" class="h4 mb-2">Username</label>
                 </div>
-                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="username" name="username"/>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="username"
+                       name="username"/>
                 <small class="invalid-feedback text-danger">Username length must be between 3 and 20 characters</small>
             </div>
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="email" class="h4 mb-2">Email</label>
                 </div>
-                <input th:field="" th:errorclass="is-invalid" type="email" class="form-control" id="email" name="email"/>
+                <input th:field="" th:errorclass="is-invalid" type="email" class="form-control" id="email"
+                       name="email"/>
 
                 <small class="invalid-feedback text-danger">Email cannot be empty and must contain @</small>
             </div>
@@ -47,7 +51,8 @@
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="email" class="h4 mb-2">Company position</label>
                 </div>
-                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="position" name="position"/>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="position"
+                       name="position"/>
 
                 <small class="invalid-feedback text-danger">Company position cannot be empty</small>
             </div>
@@ -63,7 +68,8 @@
                 <div class="label-holder  textCol d-flex justify-content-center">
                     <label for="password" class="h4 mb-2">Password</label>
                 </div>
-                <input th:field="" th:errorclass="is-invalid" type="password" class="form-control" id="password" name="password"/>
+                <input th:field="" th:errorclass="is-invalid" type="password" class="form-control" id="password"
+                       name="password"/>
                 <small class="invalid-feedback text-danger">Password length must be between 3 and 20 characters</small>
             </div>
             <div class="form-group">
@@ -85,8 +91,7 @@
             </div>
         </form>
     </main>
-    <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>
-
+<footer th:replace="fragments/commons::footer"></footer>
 </html>

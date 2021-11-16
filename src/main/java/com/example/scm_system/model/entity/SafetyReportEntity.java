@@ -1,6 +1,7 @@
 package com.example.scm_system.model.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -9,6 +10,7 @@ public class SafetyReportEntity extends BaseEntity {
 
     private UserEntity sendBy;
     private String topic;
+    private LocalDateTime sendDatetime;
     private String description;
     private Set<EvidenceEntity> evidence;
 
@@ -31,6 +33,15 @@ public class SafetyReportEntity extends BaseEntity {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    @Column(nullable = false)
+    public LocalDateTime getSendDatetime() {
+        return sendDatetime;
+    }
+
+    public void setSendDatetime(LocalDateTime sendDatetime) {
+        this.sendDatetime = sendDatetime;
     }
 
     @Column(nullable = false, columnDefinition = "TEXT")

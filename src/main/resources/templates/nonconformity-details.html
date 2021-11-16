@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+
+<div class="container-fluid">
+    <h2 class="text-center text-white mt-5">Nonconformity Details</h2>
+    <div class="offers row mx-auto d-flex flex-row justify-content-center">
+        <div th:object=""
+             class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+
+            <div class="card-body pb-1">
+                <h5 class="card-title" th:text="">
+                    Nonconformity Reference №</h5>
+            </div>
+            <ul class="offer-details list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="card-text"><span th:text="|Raised by: |">Raised by</span></div>
+                    <div class="card-text"><span th:text="|Level: |">Level</span></div>
+                    <div class="card-text"><span th:text="|Raised date: |">Raised date</span></div>
+                    <div class="card-text"><span th:text="|Closure date: |">Closure date</span></div>
+                    <div class="card-text"><span th:text="|Status: |">Closure date</span></div>
+                    <div class="card-text"><span th:text="|Releted audit ref.: |">Audit reference</span></div>
+                    <div class="card-text"><span th:text="|Description: |">Description</span></div>
+                </li>
+            </ul>
+            <div class="card-body">
+                <div class="row">
+                    <a class="btn btn-link" th:href="">Update</a>
+
+                    <form th:action="" th:method="delete">
+                        <input type="submit" class="btn btn-link" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Look in gallery html code for Pathfinder -->
+
+
+        <section class="evidence">
+            <h2 class="text-center text-white mt-5">Evidence</h2>
+            <img th:each="" th:src="" width="200px" height="200px" alt="">
+        </section>
+
+        <!-- for one picture evidence
+
+        <div th:object=""
+             class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+            <img class="card-img-top" th:src="*{getImageUrl()}" alt="Car image">
+        </div>
+
+        -->
+    </div>
+</div>
+
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+</html>
