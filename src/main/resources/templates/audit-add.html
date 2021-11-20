@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SCM System</title>
+    <script src="https://kit.fontawesome.com/75dd3c0b94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/reset-css.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-nav">
+        <a class="navbar" href="/"><img alt="logo" src="/img/logo.jpg" class="logo"></a>
+        <!--        <a class="nav-link text-white active h5" href="/">SCM System</a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Login</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Register</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Home</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Profile</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Assign Audit</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Audits</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Nonconformities</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Send Report</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Reports</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <h3 class="text-center mt-2"><span class="badge badge-dark">Add Audit Report</span></h3>
+        <hr class="hr-3 col-md-8 bg-white"/>
+        <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded" method="" action="/">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="refNumber">Reference №</label>
+                    <input id="refNumber" type="text" class="form-control"
+                           placeholder="Audit ref. number"/>
+                    <small class="invalid-feedback text-danger">Ref. number is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="topic">Topic</label>
+                    <input id="topic" type="text" class="form-control"
+                           placeholder="Topic"/>
+                    <small class="invalid-feedback text-danger">Topic is required</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="department">Department</label>
+                    <select th:field="" th:errorclass="is-invalid" id="department" class="form-control">
+                        <option value="">- Select a department -</option>
+                        <optgroup label="Department name">
+                            <option>Department</option>
+                        </optgroup>
+                    </select>
+                    <small class="invalid-feedback text-danger">Department is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="status">Status</label>
+                    <select th:field="" th:errorclass="is-invalid" id="status" class="form-control">
+                        <option value="">- Select status of audit report -</option>
+                        <optgroup label="Status">
+                            <option>Status</option>
+                        </optgroup>
+                    </select>
+                    <small class="invalid-feedback text-danger">Audit report status is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="description">Description</label>
+                <textarea id="description" type="textarea" class="form-control" rows="5"
+                          placeholder="Description"></textarea>
+                <small class="invalid-feedback text-danger">Description is required</small>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="nonconformity">Number of nonconformities</label>
+                    <input id="nonconformity" type="number" min="0" max="1000" step="1" class="form-control"
+                           placeholder="Nonconformity"/>
+                    <small class="invalid-feedback text-danger">Number of nonconformities is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" for="evidence">Upload evidence</label>
+                    <input id="evidence" type="url" class="form-control"
+                           placeholder="Upload evidence">
+                    <small class="invalid-feedback text-danger">Evidence are required.</small>
+                </div>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn mb-3 btn-primary" value="Submit">Submit Audit Report</button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer>
+    <div class="container-fluid text-center">
+        <div class="footer-background h5">
+            &copy; Aviation Safety & Compliance Solutions. All rights reserved.
+            <ul>
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

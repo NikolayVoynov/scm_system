@@ -10,7 +10,7 @@ public class SafetyReportEntity extends BaseEntity {
 
     private UserEntity sendBy;
     private String topic;
-    private LocalDateTime sendDatetime;
+    private LocalDateTime occurrenceDatetime;
     private String description;
     private Set<EvidenceEntity> evidence;
 
@@ -36,12 +36,12 @@ public class SafetyReportEntity extends BaseEntity {
     }
 
     @Column(nullable = false)
-    public LocalDateTime getSendDatetime() {
-        return sendDatetime;
+    public LocalDateTime getOccurrenceDatetime() {
+        return occurrenceDatetime;
     }
 
-    public void setSendDatetime(LocalDateTime sendDatetime) {
-        this.sendDatetime = sendDatetime;
+    public void setOccurrenceDatetime(LocalDateTime sendDatetime) {
+        this.occurrenceDatetime = sendDatetime;
     }
 
     @Column(nullable = false, columnDefinition = "TEXT")

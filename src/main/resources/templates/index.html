@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SCM System</title>
+    <script src="https://kit.fontawesome.com/75dd3c0b94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/reset-css.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-nav">
+        <a class="navbar" href="/"><img alt="logo" src="/img/logo.jpg" class="logo"></a>
+<!--        <a class="nav-link text-white active h5" href="/">SCM System</a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Login</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Register</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Home</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Profile</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Assign Audit</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Audits</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Nonconformities</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Send Report</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Reports</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container bg-blur rounded mt-5">
+        <h1>Safety & Compliance Monitoring System</h1>
+        <hr class="my-3 bg-white w-50"/>
+        <p class="h4">Safety is the number one aviation priority!</p>
+        <p class="h4">It is always the responsibility of every employee to report all issues that could affect safety.</p>
+        <p class="h4">No disciplinary or punitive action will be taken against the  reporter or other individuals involved
+            unless, such errors result from illegal activity.</p>
+    </div>
+</main>
+<footer>
+    <div class="container-fluid text-center">
+        <div class="footer-background h5">
+            &copy; Aviation Safety & Compliance Solutions. All rights reserved.
+            <ul>
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

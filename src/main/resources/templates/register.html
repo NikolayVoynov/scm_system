@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SCM System</title>
+    <script src="https://kit.fontawesome.com/75dd3c0b94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/reset-css.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-nav">
+        <a class="navbar" href="/"><img alt="logo" src="/img/logo.jpg" class="logo"></a>
+        <!--        <a class="nav-link text-white active h5" href="/">SCM System</a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Login</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Register</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Home</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Profile</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Assign Audit</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Audits</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Nonconformities</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Send Report</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Reports</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <h3 class="text-center mt-2"><span class="badge badge-dark">Register User</span></h3>
+    <hr class="hr-3 col-md-8 bg-white"/>
+    <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded" method="" action="/">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="firstname" class="h6 mb-2 text-white">First name</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="firstname"
+                       name="firstname"/>
+                <small class="invalid-feedback text-danger">First name length must be between 3 and 20
+                    characters</small>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="lastname" class="h6 mb-2 text-white">Last name</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="lastname"
+                       name="lastname"/>
+                <small class="invalid-feedback text-danger">Last name length must be between 3 and 20 characters</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="username" class="h6 mb-2 text-white">Username</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="username"
+                       name="username"/>
+                <small class="invalid-feedback text-danger">Username length must be between 3 and 20 characters</small>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="email" class="h6 mb-2 text-white">Email</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="email" class="form-control" id="email"
+                       name="email"/>
+
+                <small class="invalid-feedback text-danger">Email cannot be empty and must contain @</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="position" class="h6 mb-2 text-white">Company position</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="position"
+                       name="position"/>
+                <small class="invalid-feedback text-danger">Company position cannot be empty</small>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="role" class="h6 mb-2 text-white">Role</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="text" class="form-control" id="role" name="role"/>
+
+                <small class="invalid-feedback text-danger">Role cannot be empty</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder  textCol d-flex justify-content-center">
+                    <label for="password" class="h6 mb-2 text-white">Password</label>
+                </div>
+                <input th:field="" th:errorclass="is-invalid" type="password" class="form-control" id="password"
+                       name="password"/>
+                <small class="invalid-feedback text-danger">Password length must be between 3 and 20 characters</small>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder  textCol d-flex justify-content-center">
+                    <label for="confirmPassword" class="h6 mb-2">Confirm Password</label>
+                </div>
+                <input th:field="" type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <div class="label-holder  textCol d-flex justify-content-center">
+                    <label for="profilePhoto" class="h6 mb-2">Profile photo</label>
+                </div>
+                <input th:field="" class="form-control" id="profilePhoto" name="profilePhoto"/>
+                <small class="invalid-feedback text-danger">Profile photo cannot be empty</small>
+            </div>
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn mb-3 btn-primary" value="Submit">Register</button>
+        </div>
+    </form>
+</main>
+<footer>
+    <div class="container-fluid text-center">
+        <div class="footer-background h5">
+            &copy; Aviation Safety & Compliance Solutions. All rights reserved.
+            <ul>
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SCM System</title>
+    <script src="https://kit.fontawesome.com/75dd3c0b94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/reset-css.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-nav">
+        <a class="navbar" href="/"><img alt="logo" src="/img/logo.jpg" class="logo"></a>
+        <!--        <a class="nav-link text-white active h5" href="/">SCM System</a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav row">
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Login</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Register</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Home</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Profile</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Assign Audit</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Audits</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Nonconformities</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">Send Report</a>
+                </li>
+                <li class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/">All Reports</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <h3 class="text-center mt-2"><span class="badge badge-dark">Add Nonconformity</span></h3>
+        <hr class="hr-3 col-md-8 bg-white"/>
+        <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded" method="" action="/">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="refNumber">Reference №</label>
+                    <input id="refNumber" type="text" class="form-control"
+                           placeholder="Nonconformity Reference Number"/>
+                    <small class="invalid-feedback text-danger">Ref. number is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="auditRef">Audit Reference №</label>
+                    <select th:field="" th:errorclass="is-invalid" id="auditRef" class="form-control">
+                        <option value="">- Audit Reference Number -</option>
+                        <optgroup label="Audit Reference №">
+                            <option>Audit Reference Number</option>
+                        </optgroup>
+                    </select>
+                    <small class="invalid-feedback text-danger">Audit Reference number is required</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="auditor">Auditor</label>
+                    <select th:field="" th:errorclass="is-invalid" id="auditor" class="form-control">
+                        <option value="">- Auditor -</option>
+                        <optgroup label="Auditor">
+                            <option>Auditor</option>
+                        </optgroup>
+                    </select>
+                    <small class="invalid-feedback text-danger">Auditor is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="level">Level of nonconformity</label>
+                    <select th:field="" th:errorclass="is-invalid" id="level" class="form-control">
+                        <option value="">- Select level of nonconformity -</option>
+                        <optgroup label="Level">
+                            <option>Level of nonconformity</option>
+                        </optgroup>
+                    </select>
+                    <small class="invalid-feedback text-danger">Level of nonconformity is required</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="raisedDate" class="text-white font-weight-bold">Raised Date</label>
+                    <input th:field="" th:errorclass="" type="datetime-local" class="form-control" id="raisedDate"
+                           name="raisedDate"/>
+                    <small class="invalid-feedback text-danger">Date and Time, that cannot be in the future</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="closureDate" class="text-white font-weight-bold">Closure Date</label>
+                    <input th:field="" th:errorclass="" type="datetime-local" class="form-control" id="closureDate"
+                           name="closureDate"/>
+                    <small class="invalid-feedback text-danger">Date and Time, that cannot be in the past</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="description">Description</label>
+                <textarea id="description" type="textarea" class="form-control" rows="5"
+                          placeholder="Description"></textarea>
+                <small class="invalid-feedback text-danger">Description is required</small>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="status">Status</label>
+                    <select th:field="" th:errorclass="is-invalid" id="status" class="form-control">
+                        <option value="">- Select status of nonconformity -</option>
+                        <optgroup label="Status">
+                            <option>Status</option>
+                        </optgroup>
+                    </select>
+                    <small class="invalid-feedback text-danger">Nonconformity status is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" for="evidence">Upload evidence</label>
+                    <input id="evidence" type="url" class="form-control"
+                           placeholder="Upload evidence">
+                    <small class="invalid-feedback text-danger">Evidence are required.</small>
+                </div>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn mb-3 btn-primary" value="Submit">Submit Nonconformity</button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer>
+    <div class="container-fluid text-center">
+        <div class="footer-background h5">
+            &copy; Aviation Safety & Compliance Solutions. All rights reserved.
+            <ul>
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
