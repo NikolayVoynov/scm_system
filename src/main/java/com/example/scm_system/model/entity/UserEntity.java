@@ -13,7 +13,7 @@ public class UserEntity extends BaseEntity{
     private String email;
     private RoleEntity role;
     private String companyPosition;
-    private ProfilePhotosEntity profilePhoto;
+//    private ProfilePhotosEntity profilePhoto;
 
     public UserEntity() {
     }
@@ -81,12 +81,12 @@ public class UserEntity extends BaseEntity{
         this.companyPosition = companyPosition;
     }
 
-    @OneToOne
-    public ProfilePhotosEntity getProfilePhoto() {
-        return profilePhoto;
-    }
-
-    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
+//    @OneToOne
+//    public ProfilePhotosEntity getProfilePhoto() {
+//        return profilePhoto;
+//    }
+//
+//    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
+//        this.profilePhoto = profilePhoto;
+//    }
 }

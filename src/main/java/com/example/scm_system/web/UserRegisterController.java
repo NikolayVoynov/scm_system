@@ -26,7 +26,10 @@ public class UserRegisterController {
         this.modelMapper = modelMapper;
     }
 
-//    @ModelAttribute("")
+    @ModelAttribute("userRegisterBindingModel")
+    public UserRegisterBindingModel userRegisterBindingModel() {
+        return new UserRegisterBindingModel();
+    }
 
     @GetMapping("/register")
     public String register() {

@@ -23,16 +23,16 @@
 
 
 body {
-    background-color: whitesmoke;
+    /*background-color: whitesmoke;*/
 
-    /*background-image: url('/static/img/background.jpg');*/
-    /*background-position: center center;*/
-    /*background-repeat: no-repeat;*/
-    /*background-attachment: fixed;*/
-    /*background-size: cover;*/
-    /*background-color: #464646;*/
+    background-image: url('/static/img/background.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
 
-    /*background-image: url("/static/img/background_1.jpg");*/
+    /*background-image: url('/img/background_1.jpg');*/
     /*background-position: center;*/
     /*background-attachment: fixed;*/
     /*background-size: cover;*/
