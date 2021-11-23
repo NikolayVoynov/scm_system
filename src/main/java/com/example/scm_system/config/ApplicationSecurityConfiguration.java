@@ -25,9 +25,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests().
-                requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+                antMatchers("/resources/**").permitAll().
                 antMatchers("/", "/users/login", "/users/register").permitAll().
-                antMatchers("/**").authenticated().
+//                antMatchers("/**").authenticated().
                 and().
                 formLogin().
                 loginPage("/users/login").

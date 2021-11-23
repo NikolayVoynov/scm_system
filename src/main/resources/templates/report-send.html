@@ -1,59 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>SCM System</title>
-    <script src="https://kit.fontawesome.com/75dd3c0b94.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/css/reset-css.css}" href="/css/reset-css.css"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css"/>
-    <script src="/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</head>
+<head th:replace="fragments/commons::head"></head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg bg-nav">
-        <a class="navbar" href="/"><img alt="logo" src="/img/logo.jpg" class="logo"></a>
-        <!--        <a class="nav-link text-white active h5" href="/">SCM System</a>-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav row">
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Login</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Register</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Home</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Profile</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Assign Audit</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">All Audits</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">All Nonconformities</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Send Report</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">All Reports</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+<header th:replace="fragments/commons::navbar"></header>
 <main>
     <div class="container">
         <h3 class="text-center mt-2"><span class="badge badge-dark">Safety Report</span></h3>
@@ -93,17 +43,6 @@
         </form>
     </div>
 </main>
-<footer>
-    <div class="container-fluid text-center">
-        <div class="footer-background h5">
-            &copy; Aviation Safety & Compliance Solutions. All rights reserved.
-            <ul>
-                <a href="#"><i class="fab fa-facebook-square"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </ul>
-        </div>
-    </div>
-</footer>
+<footer th:replace="fragments/commons::footer"></footer>
 </body>
 </html>
