@@ -1,6 +1,6 @@
 package com.example.scm_system.model.service;
 
-import com.example.scm_system.model.entity.ProfilePhotosEntity;
+
 import com.example.scm_system.model.entity.RoleEntity;
 
 public class UserServiceModel {
@@ -13,7 +13,7 @@ public class UserServiceModel {
     private String email;
     private RoleEntity role;
     private String companyPosition;
-    private ProfilePhotosEntity profilePhoto;
+//    private ProfilePhotosEntity profilePhoto;
 
     public Long getId() {
         return id;
@@ -79,11 +79,11 @@ public class UserServiceModel {
         this.companyPosition = companyPosition;
     }
 
-    public ProfilePhotosEntity getProfilePhoto() {
-        return profilePhoto;
-    }
-
-    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
+//    public ProfilePhotosEntity getProfilePhoto() {
+//        return profilePhoto;
+//    }
+//
+//    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
+//        this.profilePhoto = profilePhoto;
+//    }
 }

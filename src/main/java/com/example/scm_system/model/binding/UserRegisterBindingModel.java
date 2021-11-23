@@ -1,6 +1,6 @@
 package com.example.scm_system.model.binding;
 
-import com.example.scm_system.model.entity.ProfilePhotosEntity;
+
 import com.example.scm_system.model.entity.RoleEntity;
 import com.example.scm_system.model.validator.UniqueUsername;
 
@@ -21,7 +21,7 @@ public class UserRegisterBindingModel {
     private String email;
     private RoleEntity role;
     private String companyPosition;
-    private ProfilePhotosEntity profilePhoto;
+//    private ProfilePhotosEntity profilePhoto;
 
     public UserRegisterBindingModel() {
     }
@@ -105,12 +105,12 @@ public class UserRegisterBindingModel {
         this.companyPosition = companyPosition;
     }
 
-    @NotBlank
-    public ProfilePhotosEntity getProfilePhoto() {
-        return profilePhoto;
-    }
-
-    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
+//    @NotBlank
+//    public ProfilePhotosEntity getProfilePhoto() {
+//        return profilePhoto;
+//    }
+//
+//    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
+//        this.profilePhoto = profilePhoto;
+//    }
 }
