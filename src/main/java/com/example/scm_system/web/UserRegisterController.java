@@ -1,7 +1,7 @@
 package com.example.scm_system.web;
 
 import com.example.scm_system.model.binding.UserRegisterBindingModel;
-import com.example.scm_system.model.service.UserServiceModel;
+import com.example.scm_system.model.service.UserRegistrationServiceModel;
 import com.example.scm_system.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -32,12 +32,12 @@ public class UserRegisterController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String registerUser() {
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerConfirm(
+    public String register(
             @Valid UserRegisterBindingModel userRegisterBindingModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
@@ -50,10 +50,12 @@ public class UserRegisterController {
             return "redirect:register";
         }
 
-        userService.registerUser(modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
+        UserRegistrationServiceModel userRegistrationServiceModel =
+                modelMapper.map(userRegisterBindingModel, UserRegistrationServiceModel.class);
 
-        return "redirect:login";
+        userService.registerAndLoginUser(userRegistrationServiceModel);
 
+        return "redirect:/";
     }
 
 }

@@ -1,9 +1,9 @@
 package com.example.scm_system.service;
 
-import com.example.scm_system.model.service.UserServiceModel;
+import com.example.scm_system.model.service.UserRegistrationServiceModel;
 
 public interface UserService {
     boolean isUsernameFree(String username);
 
-    void registerUser(UserServiceModel userServiceModel);
+    void registerAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel);
 }

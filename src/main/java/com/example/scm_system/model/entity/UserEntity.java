@@ -1,6 +1,7 @@
 package com.example.scm_system.model.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -11,9 +12,11 @@ public class UserEntity extends BaseEntity{
     private String username;
     private String password;
     private String email;
-    private RoleEntity role;
+    private Set<RoleEntity> roles;
     private String companyPosition;
 //    private ProfilePhotosEntity profilePhoto;
+    private boolean isActive;
+
 
     public UserEntity() {
     }
@@ -63,13 +66,13 @@ public class UserEntity extends BaseEntity{
         this.email = email;
     }
 
-    @ManyToOne
-    public RoleEntity getRole() {
-        return role;
+    @ManyToMany
+    public Set<RoleEntity> getRoles() {
+        return roles;
     }
 
-    public void setRole(RoleEntity role) {
-        this.role = role;
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     @Column(nullable = false)
@@ -89,4 +92,14 @@ public class UserEntity extends BaseEntity{
 //    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
 //        this.profilePhoto = profilePhoto;
 //    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+
 }

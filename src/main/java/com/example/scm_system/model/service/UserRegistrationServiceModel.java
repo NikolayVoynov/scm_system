@@ -3,7 +3,7 @@ package com.example.scm_system.model.service;
 
 import com.example.scm_system.model.entity.RoleEntity;
 
-public class UserServiceModel {
+public class UserRegistrationServiceModel {
 
     private Long id;
     private String firstName;
