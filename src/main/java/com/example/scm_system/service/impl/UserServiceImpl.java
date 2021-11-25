@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUsernameFree(String username) {
-        return userRepository.findByUsername(username).isEmpty();
+        return userRepository.findByUsernameIgnoreCase(username).isEmpty();
     }
 
     @Override
