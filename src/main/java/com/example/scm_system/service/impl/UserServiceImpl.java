@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -20,12 +21,14 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;
     private final SystemUserDetailsServiceImpl systemUserDetailsService;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, RoleRepository roleRepository, SystemUserDetailsServiceImpl systemUserDetailsService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, RoleRepository roleRepository, SystemUserDetailsServiceImpl systemUserDetailsService) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
         this.roleRepository = roleRepository;
         this.systemUserDetailsService = systemUserDetailsService;
@@ -47,7 +50,7 @@ public class UserServiceImpl implements UserService {
         newUser.setFirstName(userRegistrationServiceModel.getFirstName());
         newUser.setLastName(userRegistrationServiceModel.getLastName());
         newUser.setActive(true);
-        newUser.setPassword(userRegistrationServiceModel.getPassword());
+        newUser.setPassword(passwordEncoder.encode(userRegistrationServiceModel.getPassword()));
         newUser.setEmail(userRegistrationServiceModel.getEmail());
         newUser.setCompanyPosition(userRegistrationServiceModel.getCompanyPosition());
         //       TODO set profile photo
