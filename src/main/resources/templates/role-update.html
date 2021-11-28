@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navbar"></header>
+<main>
+    <h3 class="text-center mt-2"><span class="badge badge-dark">Update User Role</span></h3>
+    <hr class="hr-3 col-md-4 bg-white"/>
+    <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded"
+          th:method="patch"
+          th:action="@{/users/role-update}"
+          th:object="${userUpdateRoleBindingModel}">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="username" class="text-center h6 mb-2 text-white">User</label>
+                <select th:errorclass="is-invalid" id="username" name="username" class="form-control">
+                    <option value="">- Select user -</option>
+                    <option th:each="u : ${allUsers}"
+                            th:text="${u.username}"
+                            th:value="${u.username}"
+                            th:selected="${u.username} == *{username}">
+                    </option>
+                </select>
+                <p class="errors alert alert-danger invalid-feedback">
+                    User is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="role" class="text-center h6 mb-2 text-white">Role</label>
+                <select th:errorclass="is-invalid" id="role" name="role" class="form-control">
+                    <option value="">- Select a role -</option>
+                    <option th:each="r : ${T(com.example.scm_system.model.entity.enums.RoleEnum).values()}"
+                            th:text="${r}" th:value="${r}" th:selected="${r} == *{role}">
+                    </option>
+                </select>
+                <p class="errors alert alert-danger invalid-feedback">
+                    Role is required.
+                </p>
+            </div>
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn mb-3 btn-primary" value="Update Role">Update Role</button>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

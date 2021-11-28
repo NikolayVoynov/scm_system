@@ -4,6 +4,8 @@ import com.example.scm_system.model.entity.RoleEntity;
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.RoleEnum;
 import com.example.scm_system.model.service.UserRegistrationServiceModel;
+import com.example.scm_system.model.service.UserUpdateRoleServiceModel;
+import com.example.scm_system.model.view.UserUpdateRoleViewModel;
 import com.example.scm_system.repository.RoleRepository;
 import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.UserService;
@@ -15,7 +17,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -66,5 +70,32 @@ public class UserServiceImpl implements UserService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+    }
+
+    @Override
+    public List<UserUpdateRoleViewModel> findAllUsers() {
+        return userRepository.
+                findAll().
+                stream().
+                map(userEntity -> modelMapper.map(userEntity, UserUpdateRoleViewModel.class)).
+                collect(Collectors.toList());
+
+
+    }
+
+    @Override
+    public void updateUserRole(UserUpdateRoleServiceModel userUpdateRoleServiceModel) {
+
+        UserEntity currentUserEntity = userRepository.findByUsername(userUpdateRoleServiceModel.getUsername()).orElseThrow();
+        RoleEntity newRole = new RoleEntity();
+        newRole.setRole(userUpdateRoleServiceModel.getRole());
+
+        List<RoleEntity> currentRoles = currentUserEntity.getRoles().stream().toList();
+
+        if (!currentRoles.contains(newRole)) {
+            currentUserEntity.setRoles(Set.of(newRole));
+        }
+
+        userRepository.save(currentUserEntity);
     }
 }

@@ -19,7 +19,6 @@ public class UserRegisterBindingModel {
     private String password;
     private String confirmPassword;
     private String email;
-//    private RoleEntity role;
     private String companyPosition;
 //    private ProfilePhotosEntity profilePhoto;
 
@@ -85,15 +84,6 @@ public class UserRegisterBindingModel {
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    @Enumerated(EnumType.STRING)
-//    public RoleEntity getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(RoleEntity role) {
-//        this.role = role;
-//    }
 
     @NotBlank
     @Size(min = 3)

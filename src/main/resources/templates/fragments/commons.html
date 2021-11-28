@@ -21,42 +21,48 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav row">
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" sec:authorize="!isAuthenticated()" th:href="@{/users/login}">Login</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto col-12 justify-content-end" sec:authorize="!isAuthenticated()">
+                <li class="nav-item justify-content-end">
+                    <a class="nav-link text-white active h5" th:href="@{/users/login}">Login</a>
                 </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" sec:authorize="!isAuthenticated()" th:href="@{/users/register}">Register</a>
+                <li class="nav-item justify-content-end">
+                    <a class="nav-link text-white active h5" th:href="@{/users/register}">Register</a>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin
-                    </a>
-                    <!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-                    <!--                        <a class="dropdown-item" th:href="@{/statistics}">Statistics</a>-->
-                    <!--                    </div>-->
+            </ul>
+            <ul class="navbar-nav mr-auto col-12 justify-content-between" sec:authorize="isAuthenticated()">
+                <!--                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">-->
+                <!--                    <a class="nav-link text-white active h5 dropdown-toggle" href="/" id="navbarDropdown" role="button"-->
+                <!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                <!--                        Admin-->
+                <!--                    </a>-->
+                <!--                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                <!--                                            <a class="dropdown-item" th:href="@{/statistics}">Statistics</a>-->
+                <!--                                        </div>-->
+                <!--                </li>-->
+                <li class=" nav-item">
+                    <a class="nav-link text-white active h5" th:href="@{/users/audit-add}">Audit Report</a>
                 </li>
-                <th:block sec:authorize="isAuthenticated()">
-                    <li class="nav-item col-md-4">
-                        <!--/TODO -->
-                        <a class="nav-link text-white active h5" href="/">Home</a>
-                    </li>
-                    <li class="nav-item col-md-4">
-                        <!--/TODO -->
-                        <a class="nav-link text-white active h5" href="/">Profile</a>
-                    </li>
-                    <li class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" th:href="@{/users/audit-add}">Add Audit Report</a>
-                    </li>
-                    <li class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" th:href="@{/users/report-send}">Send Safety Report</a>
-                    </li>
-                    <li class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" href="/">Logout</a>
-                    </li>
-                </th:block>
+                <li class=" nav-item ">
+                    <a class="nav-link text-white active h5" th:href="@{/users/report-send}">Safety Report</a>
+                </li>
+                <li class="nav-item">
+                    <!--/TODO -->
+                    <a class="nav-link text-white active h5" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <!--/TODO -->
+                    <a class="nav-link text-white active h5" th:href="@{/users/role-update}">Update Role</a>
+                </li>
+                <li class=" nav-item">
+                    <!--/TODO -->
+                    <a class="nav-link text-white active h5" href="/">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/users/logout}" th:method="post">
+                        <input class="btn btn-outline-light" type="submit" value="Logout">
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
