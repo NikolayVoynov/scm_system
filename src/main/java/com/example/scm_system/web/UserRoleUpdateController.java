@@ -49,7 +49,7 @@ public class UserRoleUpdateController {
 
             redirectAttributes.addFlashAttribute("userUpdateRoleBindingModel", userUpdateRoleBindingModel);
             redirectAttributes.
-                    addFlashAttribute("org.springframework.validation.BindingResult.updateUserRoleModel", bindingResult);
+                    addFlashAttribute("org.springframework.validation.BindingResult.userUpdateRoleBindingModel", bindingResult);
 
             return "redirect:/role-update";
         }
