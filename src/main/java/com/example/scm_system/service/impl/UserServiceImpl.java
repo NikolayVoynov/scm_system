@@ -1,5 +1,6 @@
 package com.example.scm_system.service.impl;
 
+import com.example.scm_system.model.entity.BaseEntity;
 import com.example.scm_system.model.entity.RoleEntity;
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.RoleEnum;
@@ -87,13 +88,12 @@ public class UserServiceImpl implements UserService {
     public void updateUserRole(UserUpdateRoleServiceModel userUpdateRoleServiceModel) {
 
         UserEntity currentUserEntity = userRepository.findByUsername(userUpdateRoleServiceModel.getUsername()).orElseThrow();
-        RoleEntity newRole = new RoleEntity();
-        newRole.setRole(userUpdateRoleServiceModel.getRole());
+        RoleEntity newRole = roleRepository.findByRole(userUpdateRoleServiceModel.getRole());
 
         List<RoleEntity> currentRoles = currentUserEntity.getRoles().stream().toList();
 
         if (!currentRoles.contains(newRole)) {
-            currentUserEntity.setRoles(Set.of(newRole));
+            currentUserEntity.getRoles().add(newRole);
         }
 
         userRepository.save(currentUserEntity);

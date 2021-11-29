@@ -6,6 +6,7 @@ import com.example.scm_system.model.validator.UniqueUsername;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserUpdateRoleBindingModel {
@@ -18,7 +19,6 @@ public class UserUpdateRoleBindingModel {
 
     @NotBlank
     @Size(min = 3, max = 20)
-    @UniqueUsername
     public String getUsername() {
         return username;
     }
@@ -27,7 +27,7 @@ public class UserUpdateRoleBindingModel {
         this.username = username;
     }
 
-    @Enumerated(EnumType.STRING)
+    @NotNull
     public RoleEnum getRole() {
         return role;
     }
