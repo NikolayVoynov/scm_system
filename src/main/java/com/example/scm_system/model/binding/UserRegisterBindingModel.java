@@ -22,8 +22,6 @@ public class UserRegisterBindingModel {
     private String companyPosition;
 //    private ProfilePhotosEntity profilePhoto;
 
-    public UserRegisterBindingModel() {
-    }
 
     @NotNull
     @Size(min = 3, max = 20)

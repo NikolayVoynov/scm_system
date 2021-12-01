@@ -1,30 +1,28 @@
-package com.example.scm_system.model.entity;
+package com.example.scm_system.model.view;
 
+import com.example.scm_system.model.entity.NonconformityEntity;
+import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 
-import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "audits")
-public class AuditEntity extends BaseEntity{
+public class AuditDetailsView {
 
     private String refNumber;
     private String topic;
     private DepartmentEnum department;
-    private UserEntity performedBy;
+    private String performedBy;
     private StatusAuditEnum status;
     private Integer numberNonconformities;
-    private Set<NonconformityEntity> nonconformities;
+    //    private Set<NonconformityEntity> nonconformities;
     private String conclusion;
-//    private Set<EvidenceEntity> evidence;
+    //    private Set<EvidenceEntity> evidence;
+    private boolean canDelete;
 
-
-    public AuditEntity() {
+    public AuditDetailsView() {
     }
 
-    @Column(nullable = false, unique = true)
     public String getRefNumber() {
         return refNumber;
     }
@@ -33,7 +31,6 @@ public class AuditEntity extends BaseEntity{
         this.refNumber = refNumber;
     }
 
-    @Column(nullable = false)
     public String getTopic() {
         return topic;
     }
@@ -50,16 +47,14 @@ public class AuditEntity extends BaseEntity{
         this.department = department;
     }
 
-    @ManyToOne
-    public UserEntity getPerformedBy() {
+    public String getPerformedBy() {
         return performedBy;
     }
 
-    public void setPerformedBy(UserEntity performedBy) {
+    public void setPerformedBy(String performedBy) {
         this.performedBy = performedBy;
     }
 
-    @Enumerated(EnumType.STRING)
     public StatusAuditEnum getStatus() {
         return status;
     }
@@ -68,7 +63,6 @@ public class AuditEntity extends BaseEntity{
         this.status = status;
     }
 
-    @Column(nullable = false)
     public Integer getNumberNonconformities() {
         return numberNonconformities;
     }
@@ -77,16 +71,6 @@ public class AuditEntity extends BaseEntity{
         this.numberNonconformities = numberNonconformities;
     }
 
-    @OneToMany
-    public Set<NonconformityEntity> getNonconformities() {
-        return nonconformities;
-    }
-
-    public void setNonconformities(Set<NonconformityEntity> nonconformities) {
-        this.nonconformities = nonconformities;
-    }
-
-    @Column(nullable = false)
     public String getConclusion() {
         return conclusion;
     }
@@ -95,12 +79,11 @@ public class AuditEntity extends BaseEntity{
         this.conclusion = conclusion;
     }
 
-//    @OneToMany
-//    public Set<EvidenceEntity> getEvidence() {
-//        return evidence;
-//    }
-//
-//    public void setEvidence(Set<EvidenceEntity> evidence) {
-//        this.evidence = evidence;
-//    }
+    public boolean isCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(boolean canDelete) {
+        this.canDelete = canDelete;
+    }
 }

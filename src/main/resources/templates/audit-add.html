@@ -11,7 +11,7 @@
         <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded"
               th:method="post"
               th:action="@{/users/audit-add}"
-              th:object="">
+              th:object="${auditAddBindingModel}">
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center h6 mb-2 text-white" for="refNumber">Reference №</label>
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center h6 mb-2 text-white" for="nonconformity">Number of nonconformities</label>
-                    <input id="nonconformity" type="number" min="0" max="1000" step="1" class="form-control"
+                    <input id="nonconformity" type="number" min="0" max="100" step="1" class="form-control"
                            placeholder="Nonconformity"/>
                     <small class="invalid-feedback text-danger">Number of nonconformities is required</small>
                 </div>

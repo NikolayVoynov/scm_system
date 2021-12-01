@@ -11,8 +11,6 @@ public class UserLoginBindingModel {
     private String username;
     private String password;
 
-    public UserLoginBindingModel() {
-    }
 
     @NotBlank
     @Size(min = 3, max = 20)
