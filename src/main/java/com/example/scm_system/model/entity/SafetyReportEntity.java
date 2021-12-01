@@ -1,6 +1,7 @@
 package com.example.scm_system.model.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ public class SafetyReportEntity extends BaseEntity {
 
     private UserEntity sendBy;
     private String topic;
-    private LocalDateTime occurrenceDatetime;
+    private LocalDate occurrenceDate;
     private String description;
     private Set<EvidenceEntity> evidence;
 
@@ -36,12 +37,12 @@ public class SafetyReportEntity extends BaseEntity {
     }
 
     @Column(nullable = false)
-    public LocalDateTime getOccurrenceDatetime() {
-        return occurrenceDatetime;
+    public LocalDate getOccurrenceDate() {
+        return occurrenceDate;
     }
 
-    public void setOccurrenceDatetime(LocalDateTime sendDatetime) {
-        this.occurrenceDatetime = sendDatetime;
+    public void setOccurrenceDate(LocalDate sendDate) {
+        this.occurrenceDate = sendDate;
     }
 
     @Column(nullable = false, columnDefinition = "TEXT")
