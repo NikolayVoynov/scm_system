@@ -1,12 +1,9 @@
-package com.example.scm_system.model.binding;
+package com.example.scm_system.model.service;
 
-import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 
-import javax.validation.constraints.NotBlank;
-
-public class AuditAddBindingModel {
+public class AuditUpdateServiceModel {
 
     private Long id;
     private String refNumber;
@@ -26,7 +23,6 @@ public class AuditAddBindingModel {
         this.id = id;
     }
 
-    @NotBlank
     public String getRefNumber() {
         return refNumber;
     }
@@ -35,7 +31,6 @@ public class AuditAddBindingModel {
         this.refNumber = refNumber;
     }
 
-    @NotBlank
     public String getTopic() {
         return topic;
     }
@@ -44,7 +39,6 @@ public class AuditAddBindingModel {
         this.topic = topic;
     }
 
-    @NotBlank
     public DepartmentEnum getDepartment() {
         return department;
     }
@@ -53,7 +47,6 @@ public class AuditAddBindingModel {
         this.department = department;
     }
 
-    @NotBlank
     public StatusAuditEnum getStatus() {
         return status;
     }
@@ -62,7 +55,6 @@ public class AuditAddBindingModel {
         this.status = status;
     }
 
-    @NotBlank
     public Integer getNumberNonconformities() {
         return numberNonconformities;
     }
@@ -71,7 +63,6 @@ public class AuditAddBindingModel {
         this.numberNonconformities = numberNonconformities;
     }
 
-    @NotBlank
     public String getConclusion() {
         return conclusion;
     }

@@ -14,9 +14,6 @@ public class UserUpdateRoleBindingModel {
     private String username;
     private RoleEnum role;
 
-    public UserUpdateRoleBindingModel() {
-    }
-
     @NotBlank
     @Size(min = 3, max = 20)
     public String getUsername() {

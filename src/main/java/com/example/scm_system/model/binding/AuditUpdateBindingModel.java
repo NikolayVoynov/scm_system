@@ -1,12 +1,11 @@
 package com.example.scm_system.model.binding;
 
-import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 
 import javax.validation.constraints.NotBlank;
 
-public class AuditAddBindingModel {
+public class AuditUpdateBindingModel {
 
     private Long id;
     private String refNumber;

@@ -15,9 +15,10 @@ public class AuditEntity extends BaseEntity{
     private DepartmentEnum department;
     private UserEntity performedBy;
     private StatusAuditEnum status;
+    private Integer numberNonconformities;
     private Set<NonconformityEntity> nonconformities;
     private String conclusion;
-    private Set<EvidenceEntity> evidence;
+//    private Set<EvidenceEntity> evidence;
 
 
     public AuditEntity() {
@@ -41,7 +42,6 @@ public class AuditEntity extends BaseEntity{
         this.topic = topic;
     }
 
-    @Enumerated(EnumType.STRING)
     public DepartmentEnum getDepartment() {
         return department;
     }
@@ -68,6 +68,15 @@ public class AuditEntity extends BaseEntity{
         this.status = status;
     }
 
+    @Column(nullable = false)
+    public Integer getNumberNonconformities() {
+        return numberNonconformities;
+    }
+
+    public void setNumberNonconformities(Integer numberNonconformities) {
+        this.numberNonconformities = numberNonconformities;
+    }
+
     @OneToMany
     public Set<NonconformityEntity> getNonconformities() {
         return nonconformities;
@@ -86,12 +95,12 @@ public class AuditEntity extends BaseEntity{
         this.conclusion = conclusion;
     }
 
-    @OneToMany
-    public Set<EvidenceEntity> getEvidence() {
-        return evidence;
-    }
-
-    public void setEvidence(Set<EvidenceEntity> evidence) {
-        this.evidence = evidence;
-    }
+//    @OneToMany
+//    public Set<EvidenceEntity> getEvidence() {
+//        return evidence;
+//    }
+//
+//    public void setEvidence(Set<EvidenceEntity> evidence) {
+//        this.evidence = evidence;
+//    }
 }
