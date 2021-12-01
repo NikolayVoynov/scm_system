@@ -8,41 +8,45 @@
     <div class="container-fluid">
         <h3 class="text-center mt-2"><span class="badge badge-dark">Audit Report Details</span></h3>
         <hr class="hr-3 col-md-5 bg-white"/>
-        <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded" method="" action="/">
+        <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded"
+        th:object="${audit}"
+        >
 
-            <h5 class="card-title" th:text="|Audit Ref. №: |">Audit Ref. №</h5>
+            <h5 class="card-title" th:text="|Audit Ref.'№': *{refNumber}|">Audit Ref. №</h5>
             <hr class="hr-3 col-md-11 bg-white"/>
 
-            <div class="card-text"><span th:text="|Topic: |">Topic:</span></div>
-            <div class="card-text"><span th:text="|Audited Department: |">Department:</span></div>
-            <div class="card-text"><span th:text="|Performed by: |">Performed by:</span></div>
-            <div class="card-text"><span th:text="|Status of audit: |">Status of audit:</span></div>
-            <div class="card-text"><span th:text="|Number of nonconformities: |">Number of nonconformities:</span></div>
+            <div class="card-text"><span th:text="|Topic: *{topic}|">Topic:</span></div>
+            <div class="card-text"><span th:text="|Audited Department: *{department}|">Department:</span></div>
+            <div class="card-text"><span th:text="|Performed by: *{performedBy}|">Performed by:</span></div>
+            <div class="card-text"><span th:text="|Status of audit: *{status}|">Status of audit:</span></div>
+            <div class="card-text"><span th:text="|Number of nonconformities: *{numberNonconformities}|">Number of nonconformities:</span></div>
             <hr class="hr-3 col-md-11 bg-white"/>
 
-            <div class="card-text"><span th:text="|Conclusion: |">Conclusion:</span></div>
+            <div class="card-text"><span th:text="|Conclusion: *{conclusion}|">Conclusion:</span></div>
             <hr class="hr-3 col-md-5 bg-white"/>
 
             <div class="row justify-content-center">
                 <div class="form-group col-md-3 mb-3">
-                    <a class="btn mb-3 btn-primary" th:href="">Update</a>
+                    <a class="btn mb-3 btn-primary" th:href="@{/audits/{id}/update(id=*{id})}">Update</a>
                 </div>
 
-                <div class="form-group col-md-3 mb-3">
-                    <form th:action="" th:method="delete">
+                <div class="form-group col-md-3 mb-3" th:if="*{canDelete}">
+                    <form th:action="@{/audits/{id}(id=*{id})}" th:method="delete">
                         <input type="submit" class="btn mb-3 btn-danger" value="Delete">
                     </form>
                 </div>
             </div>
 
 
-            <!-- Look in gallery html code for Pathfinder -->
+            <!-- Look in gallery html code for Pathfinder
 
 
             <section class="evidence">
                 <h2 class="text-center text-white mt-5">Evidence</h2>
                 <img th:each="" th:src="" width="200px" height="200px" alt="">
             </section>
+
+            -->
 
             <!-- for one picture evidence
 

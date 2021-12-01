@@ -59,7 +59,7 @@ public class AuditsController {
 
         AuditAddServiceModel auditAddServiceModel = auditService.addAudit(auditAddBindingModel, systemUserSpring.getUserIdentifier());
 
-        return "redirect:/audits/" + auditAddServiceModel.getId() + "/datails";
+        return "redirect:/audits/" + auditAddServiceModel.getId() + "/details";
     }
 
     // DETAILS
@@ -80,6 +80,7 @@ public class AuditsController {
         AuditDetailsView auditDetailsView = auditService.findById(id, systemUserSpring.getUserIdentifier());
         AuditUpdateBindingModel auditUpdateBindingModel = modelMapper.map(auditDetailsView, AuditUpdateBindingModel.class);
 
+        model.addAttribute("auditUpdateBindingModel", auditUpdateBindingModel);
         model.addAttribute("departments", DepartmentEnum.values());
         model.addAttribute("status", StatusAuditEnum.values());
 

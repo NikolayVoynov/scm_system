@@ -5,6 +5,9 @@ import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 public class AuditAddBindingModel {
 
@@ -26,7 +29,7 @@ public class AuditAddBindingModel {
         this.id = id;
     }
 
-    @NotBlank
+    @NotNull
     public String getRefNumber() {
         return refNumber;
     }
@@ -35,7 +38,7 @@ public class AuditAddBindingModel {
         this.refNumber = refNumber;
     }
 
-    @NotBlank
+    @NotNull
     public String getTopic() {
         return topic;
     }
@@ -44,7 +47,7 @@ public class AuditAddBindingModel {
         this.topic = topic;
     }
 
-    @NotBlank
+    @NotNull
     public DepartmentEnum getDepartment() {
         return department;
     }
@@ -53,7 +56,7 @@ public class AuditAddBindingModel {
         this.department = department;
     }
 
-    @NotBlank
+    @NotNull
     public StatusAuditEnum getStatus() {
         return status;
     }
@@ -62,7 +65,8 @@ public class AuditAddBindingModel {
         this.status = status;
     }
 
-    @NotBlank
+    @NotNull
+    @PositiveOrZero
     public Integer getNumberNonconformities() {
         return numberNonconformities;
     }
@@ -71,7 +75,7 @@ public class AuditAddBindingModel {
         this.numberNonconformities = numberNonconformities;
     }
 
-    @NotBlank
+    @NotEmpty
     public String getConclusion() {
         return conclusion;
     }

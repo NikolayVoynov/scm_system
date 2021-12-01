@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class AuditDetailsView {
 
+    private Long id;
     private String refNumber;
     private String topic;
     private DepartmentEnum department;
@@ -21,6 +22,14 @@ public class AuditDetailsView {
     private boolean canDelete;
 
     public AuditDetailsView() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getRefNumber() {
