@@ -14,4 +14,6 @@ public interface UserService {
     List<UserUpdateRoleViewModel> findAllUsers();
 
     void updateUserRole(UserUpdateRoleServiceModel userUpdateRoleServiceModel);
+
+    void initializeAdmin();
 }
