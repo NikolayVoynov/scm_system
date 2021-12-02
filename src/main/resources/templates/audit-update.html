@@ -42,11 +42,11 @@
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center h6 mb-2 text-white" for="status">Status</label>
                     <select th:errorclass="is-invalid" name="status" id="status" class="form-control">
-                        <option value="">- Select status of audit report -</option>
+                        <option value="">- Select status of Audit report -</option>
                         <option th:each="s : ${status}"
                                 th:value="${s}"
                                 th:text="${s}"
-                                th:selected="${s} == *{status}">Department
+                                th:selected="${s} == *{status}">Status
                         </option>
                     </select>
                     <small class="invalid-feedback text-danger">Audit report status is required</small>

@@ -7,7 +7,7 @@ import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.RoleEnum;
 import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
-import com.example.scm_system.model.view.AuditDetailsView;
+import com.example.scm_system.model.view.AuditDetailsViewModel;
 import com.example.scm_system.repository.AuditRepository;
 import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.AuditService;
@@ -45,9 +45,11 @@ public class AuditServiceImpl implements AuditService {
         return modelMapper.map(savedAudit, AuditAddServiceModel.class);
     }
 
+    // DETAILS
+
     @Override
-    public AuditDetailsView findById(Long id, String currentUser) {
-        AuditDetailsView auditDetailsView =
+    public AuditDetailsViewModel findById(Long id, String currentUser) {
+        AuditDetailsViewModel auditDetailsView =
                 auditRepository.
                         findById(id).
                         map(a -> mapDetailsView(currentUser, a)).
@@ -56,6 +58,7 @@ public class AuditServiceImpl implements AuditService {
         return auditDetailsView;
     }
 
+    @Override
     public boolean isOwner(String username, Long id) {
         Optional<AuditEntity> auditOptional = auditRepository.
                 findById(id);
@@ -80,8 +83,8 @@ public class AuditServiceImpl implements AuditService {
                 anyMatch(r -> r == RoleEnum.ADMIN);
     }
 
-    private AuditDetailsView mapDetailsView(String currentUser, AuditEntity audit) {
-        AuditDetailsView auditDetailsView = modelMapper.map(audit, AuditDetailsView.class);
+    private AuditDetailsViewModel mapDetailsView(String currentUser, AuditEntity audit) {
+        AuditDetailsViewModel auditDetailsView = modelMapper.map(audit, AuditDetailsViewModel.class);
         auditDetailsView.setCanDelete(isOwner(currentUser, audit.getId()));
         auditDetailsView.setPerformedBy(audit.getPerformedBy().getFirstName() + " " + audit.getPerformedBy().getLastName());
 

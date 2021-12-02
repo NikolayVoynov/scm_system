@@ -6,7 +6,7 @@ import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
-import com.example.scm_system.model.view.AuditDetailsView;
+import com.example.scm_system.model.view.AuditDetailsViewModel;
 import com.example.scm_system.service.AuditService;
 import com.example.scm_system.service.impl.SystemUserSpring;
 import org.modelmapper.ModelMapper;
@@ -77,7 +77,7 @@ public class AuditsController {
     @GetMapping("/audits/{id}/update")
     public String updateAudit(@PathVariable Long id, Model model, @AuthenticationPrincipal SystemUserSpring systemUserSpring) {
 
-        AuditDetailsView auditDetailsView = auditService.findById(id, systemUserSpring.getUserIdentifier());
+        AuditDetailsViewModel auditDetailsView = auditService.findById(id, systemUserSpring.getUserIdentifier());
         AuditUpdateBindingModel auditUpdateBindingModel = modelMapper.map(auditDetailsView, AuditUpdateBindingModel.class);
 
         model.addAttribute("auditUpdateBindingModel", auditUpdateBindingModel);

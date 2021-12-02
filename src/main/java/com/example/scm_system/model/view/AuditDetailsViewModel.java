@@ -7,7 +7,7 @@ import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 
 import java.util.Set;
 
-public class AuditDetailsView {
+public class AuditDetailsViewModel {
 
     private Long id;
     private String refNumber;
@@ -21,7 +21,7 @@ public class AuditDetailsView {
     //    private Set<EvidenceEntity> evidence;
     private boolean canDelete;
 
-    public AuditDetailsView() {
+    public AuditDetailsViewModel() {
     }
 
     public Long getId() {

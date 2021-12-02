@@ -1,17 +1,21 @@
-package com.example.scm_system.model.service;
+package com.example.scm_system.model.binding;
 
 import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class SafetyReportSendServiceModel {
+public class SafetyReportUpdateBindingModel {
 
     private Long id;
     private String topic;
     private LocalDateTime occurrenceDateTime;
-    private StatusSafetyReportEnum status;
     private String description;
+    private StatusSafetyReportEnum status;
 //    private Set<EvidenceEntity> evidence;
 
 
@@ -23,6 +27,7 @@ public class SafetyReportSendServiceModel {
         this.id = id;
     }
 
+    @NotNull
     public String getTopic() {
         return topic;
     }
@@ -31,6 +36,8 @@ public class SafetyReportSendServiceModel {
         this.topic = topic;
     }
 
+    @PastOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     public LocalDateTime getOccurrenceDateTime() {
         return occurrenceDateTime;
     }
@@ -39,6 +46,7 @@ public class SafetyReportSendServiceModel {
         this.occurrenceDateTime = occurrenceDateTime;
     }
 
+    @NotEmpty
     public String getDescription() {
         return description;
     }

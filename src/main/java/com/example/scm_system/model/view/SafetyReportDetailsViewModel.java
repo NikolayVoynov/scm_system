@@ -1,18 +1,20 @@
-package com.example.scm_system.model.service;
+package com.example.scm_system.model.view;
 
 import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class SafetyReportSendServiceModel {
+public class SafetyReportDetailsViewModel {
 
     private Long id;
     private String topic;
+    private String sendBy;
     private LocalDateTime occurrenceDateTime;
-    private StatusSafetyReportEnum status;
     private String description;
-//    private Set<EvidenceEntity> evidence;
+    private StatusSafetyReportEnum status;
+    //    private Set<EvidenceEntity> evidence;
+    private boolean canDelete;
 
 
     public Long getId() {
@@ -31,6 +33,14 @@ public class SafetyReportSendServiceModel {
         this.topic = topic;
     }
 
+    public String getSendBy() {
+        return sendBy;
+    }
+
+    public void setSendBy(String sendBy) {
+        this.sendBy = sendBy;
+    }
+
     public LocalDateTime getOccurrenceDateTime() {
         return occurrenceDateTime;
     }
@@ -45,6 +55,14 @@ public class SafetyReportSendServiceModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(boolean canDelete) {
+        this.canDelete = canDelete;
     }
 
     public StatusSafetyReportEnum getStatus() {

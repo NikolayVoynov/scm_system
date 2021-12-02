@@ -1,5 +1,7 @@
 package com.example.scm_system.model.entity;
 
+import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,9 +13,10 @@ public class SafetyReportEntity extends BaseEntity {
 
     private UserEntity sendBy;
     private String topic;
-    private LocalDate occurrenceDate;
+    private LocalDateTime occurrenceDateTime;
     private String description;
-    private Set<EvidenceEntity> evidence;
+    private StatusSafetyReportEnum status;
+//    private Set<EvidenceEntity> evidence;
 
     public SafetyReportEntity() {
     }
@@ -37,12 +40,12 @@ public class SafetyReportEntity extends BaseEntity {
     }
 
     @Column(nullable = false)
-    public LocalDate getOccurrenceDate() {
-        return occurrenceDate;
+    public LocalDateTime getOccurrenceDateTime() {
+        return occurrenceDateTime;
     }
 
-    public void setOccurrenceDate(LocalDate sendDate) {
-        this.occurrenceDate = sendDate;
+    public void setOccurrenceDateTime(LocalDateTime occurrenceDateTime) {
+        this.occurrenceDateTime = occurrenceDateTime;
     }
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -54,12 +57,21 @@ public class SafetyReportEntity extends BaseEntity {
         this.description = description;
     }
 
-    @OneToMany
-    public Set<EvidenceEntity> getEvidence() {
-        return evidence;
+    @Enumerated(EnumType.STRING)
+    public StatusSafetyReportEnum getStatus() {
+        return status;
     }
 
-    public void setEvidence(Set<EvidenceEntity> evidence) {
-        this.evidence = evidence;
+    public void setStatus(StatusSafetyReportEnum status) {
+        this.status = status;
     }
+
+    //    @OneToMany
+//    public Set<EvidenceEntity> getEvidence() {
+//        return evidence;
+//    }
+//
+//    public void setEvidence(Set<EvidenceEntity> evidence) {
+//        this.evidence = evidence;
+//    }
 }

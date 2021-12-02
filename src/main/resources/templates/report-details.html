@@ -8,26 +8,28 @@
     <div class="container-fluid">
         <h3 class="text-center mt-2"><span class="badge badge-dark">Safety Report Details</span></h3>
         <hr class="hr-3 col-md-5 bg-white"/>
-        <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded" method="" action="/">
+        <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded"
+              th:object="${safetyReport}">
 
-            <h5 class="card-title" th:text="|Safety Report Ref. №: |">Safety Report Ref. №:</h5>
+            <h5 class="card-title" th:text="|Safety Report Ref.Num.: SR *{id}|">Safety Report Ref. Num.:</h5>
             <hr class="hr-3 col-md-11 bg-white"/>
 
-            <div class="card-text"><span th:text="|Topic: |">Topic:</span></div>
-            <div class="card-text"><span th:text="|Send by: |">Send by:</span></div>
-            <div class="card-text"><span th:text="|Time of occurrence: |">Time of occurrence:</span></div>
+            <div class="card-text"><span th:text="|Topic: *{topic}|">Topic:</span></div>
+            <div class="card-text"><span th:text="|Send by: *{sendBy}|">Send by:</span></div>
+            <div class="card-text"><span th:text="|Time of occurrence: *{occurrenceDateTime}|">Time of occurrence:</span></div>
+            <div class="card-text"><span th:text="|Status: *{status}|">Status:</span></div>
             <hr class="hr-3 col-md-11 bg-white"/>
 
-            <div class="card-text"><span th:text="|Description: |">Description:</span></div>
+            <div class="card-text"><span th:text="|Description: *{description}|">Description:</span></div>
             <hr class="hr-3 col-md-5 bg-white"/>
 
             <div class="row justify-content-center">
                 <div class="form-group col-md-3 mb-3">
-                    <a class="btn mb-3 btn-success" th:href="">Update</a>
+                    <a class="btn mb-3 btn-success" th:href="@{/reports/{id}/update(id=*{id})}">Update</a>
                 </div>
 
-                <div class="form-group col-md-3 mb-3">
-                    <form th:action="" th:method="delete">
+                <div class="form-group col-md-3 mb-3" th:if="*{canDelete}">
+                    <form th:action="@{/reports/{id}(id=*{id})}" th:method="delete">
                         <input type="submit" class="btn mb-3 btn-danger" value="Delete">
                     </form>
                 </div>
@@ -37,10 +39,10 @@
             <!-- Look in gallery html code for Pathfinder -->
 
 
-            <section class="evidence">
-                <h2 class="text-center text-white mt-5">Evidence</h2>
-                <img th:each="" th:src="" width="200px" height="200px" alt="">
-            </section>
+<!--            <section class="evidence">-->
+<!--                <h2 class="text-center text-white mt-5">Evidence</h2>-->
+<!--                <img th:each="" th:src="" width="200px" height="200px" alt="">-->
+<!--            </section>-->
 
             <!-- for one picture evidence
 

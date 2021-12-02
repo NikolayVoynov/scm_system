@@ -5,13 +5,13 @@ import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class SafetyReportSendServiceModel {
+public class SafetyReportUpdateServiceModel {
 
     private Long id;
     private String topic;
     private LocalDateTime occurrenceDateTime;
-    private StatusSafetyReportEnum status;
     private String description;
+    private StatusSafetyReportEnum status;
 //    private Set<EvidenceEntity> evidence;
 
 
