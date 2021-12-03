@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuditRepository extends JpaRepository<AuditEntity, Long> {
+
+    AuditEntity findByRefNumber(String refNumber);
 }

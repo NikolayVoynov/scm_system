@@ -4,6 +4,9 @@ import com.example.scm_system.model.binding.AuditAddBindingModel;
 import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
 import com.example.scm_system.model.view.AuditDetailsViewModel;
+import com.example.scm_system.model.view.AuditNonconformityViewModel;
+
+import java.util.List;
 
 public interface AuditService {
     AuditAddServiceModel addAudit(AuditAddBindingModel auditAddBindingModel, String ownerUsername);
@@ -15,4 +18,6 @@ public interface AuditService {
     void deleteAudit(Long id);
 
     void updateAudit(AuditUpdateServiceModel auditUpdateServiceModel);
+
+    List<AuditNonconformityViewModel> getAllAudits();
 }

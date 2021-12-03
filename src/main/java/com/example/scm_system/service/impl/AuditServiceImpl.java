@@ -8,14 +8,17 @@ import com.example.scm_system.model.entity.enums.RoleEnum;
 import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
 import com.example.scm_system.model.view.AuditDetailsViewModel;
+import com.example.scm_system.model.view.AuditNonconformityViewModel;
 import com.example.scm_system.repository.AuditRepository;
 import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.AuditService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AuditServiceImpl implements AuditService {
@@ -110,12 +113,27 @@ public class AuditServiceImpl implements AuditService {
         auditRepository.save(auditEntity);
     }
 
+
     // DELETE
 
     @Override
     public void deleteAudit(Long id) {
 
         auditRepository.deleteById(id);
+    }
+
+    // ADD NONCONFORMITY
+
+    @Override
+    public List<AuditNonconformityViewModel> getAllAudits() {
+        return auditRepository.findAll()
+                .stream()
+                .map(auditEntity -> {
+                    AuditNonconformityViewModel auditNonconformityViewModel = new AuditNonconformityViewModel();
+                    auditNonconformityViewModel.setRefNumber(auditEntity.getRefNumber());
+
+                    return auditNonconformityViewModel;
+                }).collect(Collectors.toList());
     }
 
 

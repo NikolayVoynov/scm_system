@@ -1,0 +1,135 @@
+package com.example.scm_system.service.impl;
+
+import com.example.scm_system.model.binding.NonconformityAddBindingModel;
+import com.example.scm_system.model.entity.AuditEntity;
+import com.example.scm_system.model.entity.NonconformityEntity;
+import com.example.scm_system.model.entity.RoleEntity;
+import com.example.scm_system.model.entity.UserEntity;
+import com.example.scm_system.model.entity.enums.RoleEnum;
+import com.example.scm_system.model.service.NonconformityAddServiceModel;
+import com.example.scm_system.model.service.NonconformityUpdateServiceModel;
+import com.example.scm_system.model.view.NonconformityDetailsViewModel;
+import com.example.scm_system.repository.AuditRepository;
+import com.example.scm_system.repository.NonconformityRepository;
+import com.example.scm_system.repository.UserRepository;
+import com.example.scm_system.service.NonconformityService;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+@Service
+public class NonconformityServiceImpl implements NonconformityService {
+
+    private final NonconformityRepository nonconformityRepository;
+    private final UserRepository userRepository;
+    private final AuditRepository auditRepository;
+    private final ModelMapper modelMapper;
+
+    public NonconformityServiceImpl(NonconformityRepository nonconformityRepository,
+                                    UserRepository userRepository, AuditRepository auditRepository, ModelMapper modelMapper) {
+        this.nonconformityRepository = nonconformityRepository;
+        this.userRepository = userRepository;
+        this.auditRepository = auditRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    //ADD
+
+    @Override
+    public NonconformityAddServiceModel addNonconformity(NonconformityAddBindingModel nonconformityAddBindingModel,
+                                                         String ownerUsername) {
+
+        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow();
+        NonconformityAddServiceModel nonconformityAddServiceModel =
+                modelMapper.map(nonconformityAddBindingModel, NonconformityAddServiceModel.class);
+        NonconformityEntity newNonconformity = modelMapper.map(nonconformityAddServiceModel, NonconformityEntity.class);
+        newNonconformity.setRaisedBy(userEntity);
+
+        AuditEntity auditEntity = auditRepository.findByRefNumber(nonconformityAddBindingModel.getAuditRefNumber());
+        newNonconformity.setAudit(auditEntity);
+
+        NonconformityEntity savedNonconformity = nonconformityRepository.save(newNonconformity);
+
+        return modelMapper.map(savedNonconformity, NonconformityAddServiceModel.class);
+    }
+
+    // DETAILS
+
+    @Override
+    public NonconformityDetailsViewModel findById(Long id, String currentUser) {
+        NonconformityDetailsViewModel nonconformityDetailsViewModel =
+                nonconformityRepository.
+                        findById(id).
+                        map(n -> mapDetailsView(currentUser, n)).
+                        get();
+
+        return nonconformityDetailsViewModel;
+    }
+
+    private NonconformityDetailsViewModel mapDetailsView(String currentUser, NonconformityEntity nonconformity) {
+        NonconformityDetailsViewModel nonconformityDetailsViewModel =
+                modelMapper.map(nonconformity, NonconformityDetailsViewModel.class);
+        nonconformityDetailsViewModel.setCanDelete(isOwner(currentUser, nonconformity.getId()));
+        nonconformityDetailsViewModel.
+                setRaisedBy(nonconformity.getRaisedBy().getFirstName() + " " + nonconformity.getRaisedBy().getLastName());
+
+        return nonconformityDetailsViewModel;
+    }
+
+    @Override
+    public boolean isOwner(String username, Long id) {
+        Optional<NonconformityEntity> nonconformityOptional = nonconformityRepository.
+                findById(id);
+        Optional<UserEntity> user = userRepository.
+                findByUsername(username);
+
+        if (nonconformityOptional.isEmpty() || user.isEmpty()) {
+            return false;
+        } else {
+            NonconformityEntity nonconformityEntity = nonconformityOptional.get();
+
+            return isAdmin(user.get()) ||
+                    nonconformityEntity.getRaisedBy().getUsername().equals(username);
+        }
+    }
+
+
+    private boolean isAdmin(UserEntity user) {
+        return user.
+                getRoles().
+                stream().
+                map(RoleEntity::getRole).
+                anyMatch(r -> r == RoleEnum.ADMIN);
+    }
+
+    // UPDATE
+
+    @Override
+    public void updateNonconformity(NonconformityUpdateServiceModel nonconformityUpdateServiceModel) {
+
+        NonconformityEntity nonconformity =
+                nonconformityRepository.findById(nonconformityUpdateServiceModel.getId()).orElseThrow(() ->
+                        new NoSuchElementException("Nonconformity with id " + nonconformityUpdateServiceModel.getId() + " not found!"));
+
+        AuditEntity auditEntity = auditRepository.findByRefNumber(nonconformityUpdateServiceModel.getAuditRefNumber());
+        nonconformity.setAudit(auditEntity);
+        nonconformity.setRefNumber(nonconformityUpdateServiceModel.getRefNumber());
+        nonconformity.setDescription(nonconformityUpdateServiceModel.getDescription());
+        nonconformity.setLevel(nonconformityUpdateServiceModel.getLevel());
+        nonconformity.setStatus(nonconformityUpdateServiceModel.getStatus());
+        nonconformity.setRaisedDate(nonconformityUpdateServiceModel.getRaisedDate());
+        nonconformity.setClosureDate(nonconformityUpdateServiceModel.getClosureDate());
+
+        nonconformityRepository.save(nonconformity);
+    }
+
+    // DELETE
+
+    @Override
+    public void deleteNonconformity(Long id) {
+
+        nonconformityRepository.deleteById(id);
+    }
+}

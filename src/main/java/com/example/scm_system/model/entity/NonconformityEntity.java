@@ -19,7 +19,7 @@ public class NonconformityEntity extends BaseEntity{
     private LocalDate closureDate;
     private AuditEntity audit;
     private StatusNonconformityEnum status;
-    private Set<EvidenceEntity> evidence;
+//    private Set<EvidenceEntity> evidence;
 
     public NonconformityEntity() {
     }
@@ -95,12 +95,12 @@ public class NonconformityEntity extends BaseEntity{
         this.status = status;
     }
 
-    @OneToMany
-    public Set<EvidenceEntity> getEvidence() {
-        return evidence;
-    }
-
-    public void setEvidence(Set<EvidenceEntity> evidence) {
-        this.evidence = evidence;
-    }
+//    @OneToMany
+//    public Set<EvidenceEntity> getEvidence() {
+//        return evidence;
+//    }
+//
+//    public void setEvidence(Set<EvidenceEntity> evidence) {
+//        this.evidence = evidence;
+//    }
 }

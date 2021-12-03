@@ -8,84 +8,83 @@
     <div class="container">
         <h3 class="text-center mt-2"><span class="badge badge-dark">Update Nonconformity</span></h3>
         <hr class="hr-3 col-md-8 bg-white"/>
-        <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded" method="" action="/">
+        <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded"
+              th:method="patch"
+              th:action="@{/nonconformities/{id}/update(id=*{id})}"
+              th:object="${nonconformityUpdateBindingModel}">
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center h6 mb-2 text-white" for="refNumber">Reference №</label>
-                    <input id="refNumber" type="text" class="form-control"
+                    <input th:field="*{refNumber}" th:errorclass="is-invalid" name="refNumber" id="refNumber"
+                           type="text" class="form-control"
                            placeholder="Nonconformity Reference Number"/>
                     <small class="invalid-feedback text-danger">Ref. number is required</small>
                 </div>
                 <div class="form-group col-md-6 mb-3">
-                    <label class="text-center h6 mb-2 text-white" for="auditRef">Audit Reference №</label>
-                    <select th:field="" th:errorclass="is-invalid" id="auditRef" class="form-control">
+                    <label class="text-center h6 mb-2 text-white" for="auditRefNumber">Audit Reference №</label>
+                    <select th:errorclass="is-invalid" id="auditRefNumber" name="auditRefNumber" class="form-control">
                         <option value="">- Audit Reference Number -</option>
-                        <optgroup label="Audit Reference №">
-                            <option>Audit Reference Number</option>
-                        </optgroup>
+                        <option th:each="audit : ${auditsModels}"
+                                th:text="${audit.refNumber}"
+                                th:value="${audit.refNumber}"
+                                th:selected="${audit.refNumber} == *{auditRefNumber}">Audit
+                        </option>
                     </select>
                     <small class="invalid-feedback text-danger">Audit Reference number is required</small>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
-                    <label class="text-center h6 mb-2 text-white" for="auditor">Auditor</label>
-                    <select th:field="" th:errorclass="is-invalid" id="auditor" class="form-control">
-                        <option value="">- Auditor -</option>
-                        <optgroup label="Auditor">
-                            <option>Auditor</option>
-                        </optgroup>
-                    </select>
-                    <small class="invalid-feedback text-danger">Auditor is required</small>
-                </div>
-                <div class="form-group col-md-6 mb-3">
                     <label class="text-center h6 mb-2 text-white" for="level">Level of nonconformity</label>
-                    <select th:field="" th:errorclass="is-invalid" id="level" class="form-control">
+                    <select th:errorclass="is-invalid" id="level" name="level" class="form-control">
                         <option value="">- Select level of nonconformity -</option>
-                        <optgroup label="Level">
-                            <option>Level of nonconformity</option>
-                        </optgroup>
+                        <option>Level of nonconformity</option>
+                        <option th:each="levelNC : ${level}"
+                                th:value="${levelNC}"
+                                th:text="${levelNC}"
+                                th:selected="${levelNC} == *{level}">Level Nonconformity
+                        </option>
                     </select>
                     <small class="invalid-feedback text-danger">Level of nonconformity is required</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="status">Status</label>
+                    <select th:field="" th:errorclass="is-invalid" id="status" name="status" class="form-control">
+                        <option value="">- Select status of nonconformity -</option>
+                        <option th:each="statusNC : ${status}"
+                                th:value="${statusNC}"
+                                th:text="${statusNC}"
+                                th:selected="${statusNC} == *{status}">Status Nonconformity
+                        </option>
+                    </select>
+                    <small class="invalid-feedback text-danger">Nonconformity status is required</small>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label for="raisedDate" class="text-white font-weight-bold">Raised Date</label>
-                    <input th:field="" th:errorclass="" type="datetime-local" class="form-control" id="raisedDate"
-                           name="raisedDate"/>
-                    <small class="invalid-feedback text-danger">Date and Time, that cannot be in the future</small>
+                    <input th:field="*{raisedDate}" th:errorclass="is-invalid" name="raisedDate" type="date" class="form-control" id="raisedDate"/>
+                    <small class="invalid-feedback text-danger">Date that cannot be in the future</small>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label for="closureDate" class="text-white font-weight-bold">Closure Date</label>
-                    <input th:field="" th:errorclass="" type="datetime-local" class="form-control" id="closureDate"
-                           name="closureDate"/>
-                    <small class="invalid-feedback text-danger">Date and Time, that cannot be in the past</small>
+                    <input th:field="*{closureDate}" th:errorclass="is-invalid" name="closureDate" type="date" class="form-control" id="closureDate"/>
+                    <small class="invalid-feedback text-danger">Date that cannot be in the past</small>
                 </div>
             </div>
             <div class="form-group">
                 <label class="text-white font-weight-bold" for="description">Description</label>
-                <textarea id="description" type="textarea" class="form-control" rows="5"
+                <textarea th:field="*{description}" th:errorclass="is-invalid" name="description" id="description" type="textarea" class="form-control" rows="5"
                           placeholder="Description"></textarea>
                 <small class="invalid-feedback text-danger">Description is required</small>
             </div>
             <div class="row">
-                <div class="form-group col-md-6 mb-3">
-                    <label class="text-center h6 mb-2 text-white" for="status">Status</label>
-                    <select th:field="" th:errorclass="is-invalid" id="status" class="form-control">
-                        <option value="">- Select status of nonconformity -</option>
-                        <optgroup label="Status">
-                            <option>Status</option>
-                        </optgroup>
-                    </select>
-                    <small class="invalid-feedback text-danger">Nonconformity status is required</small>
-                </div>
-                <div class="form-group col-md-6 mb-3">
-                    <label class="text-white font-weight-bold" for="evidence">Upload evidence</label>
-                    <input id="evidence" type="url" class="form-control"
-                           placeholder="Upload evidence">
-                    <small class="invalid-feedback text-danger">Evidence are required.</small>
-                </div>
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label class="text-white font-weight-bold" for="evidence">Upload evidence</label>-->
+<!--                    <input id="evidence" type="url" class="form-control"-->
+<!--                           placeholder="Upload evidence">-->
+<!--                    <small class="invalid-feedback text-danger">Evidence are required.</small>-->
+<!--                </div>-->
             </div>
             <div class="button-holder d-flex justify-content-center">
                 <button type="submit" class="btn mb-3 btn-primary" value="Submit">Update Nonconformity</button>
