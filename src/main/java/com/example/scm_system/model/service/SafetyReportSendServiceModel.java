@@ -1,9 +1,12 @@
 package com.example.scm_system.model.service;
 
+import com.example.scm_system.model.entity.EvidenceEntity;
 import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class SafetyReportSendServiceModel {
 
@@ -12,7 +15,7 @@ public class SafetyReportSendServiceModel {
     private LocalDateTime occurrenceDateTime;
     private StatusSafetyReportEnum status;
     private String description;
-//    private Set<EvidenceEntity> evidence;
+    private Set<EvidenceEntity> evidence;
 
 
     public Long getId() {
@@ -53,5 +56,13 @@ public class SafetyReportSendServiceModel {
 
     public void setStatus(StatusSafetyReportEnum status) {
         this.status = status;
+    }
+
+    public Set<EvidenceEntity> getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(Set<EvidenceEntity> evidence) {
+        this.evidence = evidence;
     }
 }

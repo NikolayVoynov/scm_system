@@ -11,18 +11,21 @@
         <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded"
               th:method="post"
               th:action="@{/reports/send}"
-              th:object="${safetyReportSendBindingModel}">
+              th:object="${safetyReportSendBindingModel}"
+              enctype="multipart/form-data">
 
             <div class="form-group">
                 <label class="text-center h6 mb-2 text-white" for="topic">Topic</label>
-                <input th:field="*{topic}" th:errorclass="is-invalid" name="topic" id="topic" type="text" class="form-control"
+                <input th:field="*{topic}" th:errorclass="is-invalid" name="topic" id="topic" type="text"
+                       class="form-control"
                        placeholder="Topic"/>
                 <small class="invalid-feedback text-danger">Topic is required</small>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label for="occurrenceDate" class="text-center h6 mb-2 text-white">Occurrence Time</label>
-                    <input th:field="*{occurrenceDateTime}" th:errorclass="is-invalid" name="occurrenceDateTime" type="datetime-local" class="form-control" id="occurrenceDate"/>
+                    <input th:field="*{occurrenceDateTime}" th:errorclass="is-invalid" name="occurrenceDateTime"
+                           type="datetime-local" class="form-control" id="occurrenceDate"/>
                     <small class="invalid-feedback text-danger">Time that cannot be in the future</small>
                 </div>
                 <div class="form-group col-md-6 mb-3">
@@ -38,16 +41,15 @@
             </div>
             <div class="form-group">
                 <label class="text-center h6 mb-2 text-white" for="description">Description</label>
-                <textarea th:field="*{description}" th:errorclass="is-invalid" name="description" id="description" type="textarea" class="form-control" rows="5"
+                <textarea th:field="*{description}" th:errorclass="is-invalid" name="description" id="description"
+                          type="textarea" class="form-control" rows="5"
                           placeholder="Description"></textarea>
                 <small class="invalid-feedback text-danger">Description is required</small>
             </div>
-<!--            <div class="form-group col-md-6 mb-3">-->
-<!--                <label class="text-center h6 mb-2 text-white" for="evidence">Upload evidence</label>-->
-<!--                <input id="evidence" type="url" class="form-control"-->
-<!--                       placeholder="Upload evidence">-->
-<!--                <small class="invalid-feedback text-danger">Evidence are required.</small>-->
-<!--            </div>-->
+            <div class="form-group col-md-6 mb-3">
+                    <label class="text-center h6 mb-2 text-white" for="evidence">Upload 1st evidence</label>
+                    <input name="evidence" id="evidence" type="file" class="form-control" placeholder="Upload evidence">
+            </div>
             <div class="button-holder d-flex justify-content-center">
                 <button type="submit" class="btn mb-3 btn-primary" value="Submit">Submit Safety Report</button>
             </div>

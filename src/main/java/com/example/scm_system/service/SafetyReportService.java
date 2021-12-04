@@ -5,8 +5,10 @@ import com.example.scm_system.model.service.SafetyReportSendServiceModel;
 import com.example.scm_system.model.service.SafetyReportUpdateServiceModel;
 import com.example.scm_system.model.view.SafetyReportDetailsViewModel;
 
+import java.io.IOException;
+
 public interface SafetyReportService {
-    SafetyReportSendServiceModel sendSafetyReport(SafetyReportSendBindingModel safetyReportSendBindingModel, String ownerUsername);
+    SafetyReportSendServiceModel sendSafetyReport(SafetyReportSendBindingModel safetyReportSendBindingModel, String ownerUsername) throws IOException;
 
     SafetyReportDetailsViewModel findById(Long id, String currentUser);
 

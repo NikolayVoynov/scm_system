@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -47,7 +48,7 @@ public class SafetyReportsController {
     public String sendSafetyReport(@Valid SafetyReportSendBindingModel safetyReportSendBindingModel,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes,
-                                   @AuthenticationPrincipal SystemUserSpring systemUserSpring) {
+                                   @AuthenticationPrincipal SystemUserSpring systemUserSpring) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("safetyReportSendBindingModel", safetyReportSendBindingModel)

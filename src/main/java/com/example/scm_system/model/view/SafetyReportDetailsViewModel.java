@@ -1,9 +1,11 @@
 package com.example.scm_system.model.view;
 
+import com.example.scm_system.model.entity.EvidenceEntity;
 import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class SafetyReportDetailsViewModel {
 
@@ -13,7 +15,7 @@ public class SafetyReportDetailsViewModel {
     private LocalDateTime occurrenceDateTime;
     private String description;
     private StatusSafetyReportEnum status;
-    //    private Set<EvidenceEntity> evidence;
+    private Set<EvidenceEntity> evidence;
     private boolean canDelete;
 
 
@@ -55,6 +57,14 @@ public class SafetyReportDetailsViewModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<EvidenceEntity> getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(Set<EvidenceEntity> evidence) {
+        this.evidence = evidence;
     }
 
     public boolean isCanDelete() {

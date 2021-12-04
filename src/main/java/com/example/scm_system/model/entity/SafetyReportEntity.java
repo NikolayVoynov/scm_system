@@ -1,6 +1,7 @@
 package com.example.scm_system.model.entity;
 
 import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ public class SafetyReportEntity extends BaseEntity {
     private LocalDateTime occurrenceDateTime;
     private String description;
     private StatusSafetyReportEnum status;
-//    private Set<EvidenceEntity> evidence;
+    private Set<EvidenceEntity> evidence;
 
     public SafetyReportEntity() {
     }
@@ -66,12 +67,12 @@ public class SafetyReportEntity extends BaseEntity {
         this.status = status;
     }
 
-    //    @OneToMany
-//    public Set<EvidenceEntity> getEvidence() {
-//        return evidence;
-//    }
-//
-//    public void setEvidence(Set<EvidenceEntity> evidence) {
-//        this.evidence = evidence;
-//    }
+    @OneToMany
+    public Set<EvidenceEntity> getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(Set<EvidenceEntity> evidence) {
+        this.evidence = evidence;
+    }
 }

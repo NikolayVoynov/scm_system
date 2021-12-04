@@ -10,9 +10,10 @@ import javax.persistence.Table;
 public class EvidenceEntity extends BaseEntity{
 
     private String url;
-    private AuditEntity audit;
-    private SafetyReportEntity report;
-    private NonconformityEntity nonconformity;
+    private String publicId;
+//    private AuditEntity audit;
+//    private SafetyReportEntity report;
+//    private NonconformityEntity nonconformity;
 
     public EvidenceEntity() {
     }
@@ -26,30 +27,38 @@ public class EvidenceEntity extends BaseEntity{
         this.url = url;
     }
 
-    @ManyToOne
-    public AuditEntity getAudit() {
-        return audit;
+    public String getPublicId() {
+        return publicId;
     }
 
-    public void setAudit(AuditEntity audit) {
-        this.audit = audit;
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
     }
 
-    @ManyToOne
-    public SafetyReportEntity getReport() {
-        return report;
-    }
+//    @ManyToOne
+//    public AuditEntity getAudit() {
+//        return audit;
+//    }
+//
+//    public void setAudit(AuditEntity audit) {
+//        this.audit = audit;
+//    }
 
-    public void setReport(SafetyReportEntity report) {
-        this.report = report;
-    }
+//    @ManyToOne
+//    public SafetyReportEntity getReport() {
+//        return report;
+//    }
+//
+//    public void setReport(SafetyReportEntity report) {
+//        this.report = report;
+//    }
 
-    @ManyToOne
-    public NonconformityEntity getNonconformity() {
-        return nonconformity;
-    }
-
-    public void setNonconformity(NonconformityEntity nonconformity) {
-        this.nonconformity = nonconformity;
-    }
+//    @ManyToOne
+//    public NonconformityEntity getNonconformity() {
+//        return nonconformity;
+//    }
+//
+//    public void setNonconformity(NonconformityEntity nonconformity) {
+//        this.nonconformity = nonconformity;
+//    }
 }

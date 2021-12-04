@@ -1,34 +1,40 @@
 package com.example.scm_system.service.impl;
 
 import com.example.scm_system.model.binding.SafetyReportSendBindingModel;
-import com.example.scm_system.model.entity.AuditEntity;
-import com.example.scm_system.model.entity.RoleEntity;
-import com.example.scm_system.model.entity.SafetyReportEntity;
-import com.example.scm_system.model.entity.UserEntity;
+import com.example.scm_system.model.entity.*;
 import com.example.scm_system.model.entity.enums.RoleEnum;
 import com.example.scm_system.model.service.SafetyReportSendServiceModel;
 import com.example.scm_system.model.service.SafetyReportUpdateServiceModel;
 import com.example.scm_system.model.view.SafetyReportDetailsViewModel;
+import com.example.scm_system.repository.EvidenceRepository;
 import com.example.scm_system.repository.SafetyReportRepository;
 import com.example.scm_system.repository.UserRepository;
+import com.example.scm_system.service.CloudinaryImage;
+import com.example.scm_system.service.CloudinaryService;
 import com.example.scm_system.service.SafetyReportService;
-import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SafetyReportServiceImpl implements SafetyReportService {
 
     private final SafetyReportRepository safetyReportRepository;
+    private final EvidenceRepository evidenceRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final CloudinaryService cloudinaryService;
 
     public SafetyReportServiceImpl(SafetyReportRepository safetyReportRepository,
-                                   UserRepository userRepository, ModelMapper modelMapper) {
+                                   EvidenceRepository evidenceRepository, CloudinaryService cloudinaryService, UserRepository userRepository, ModelMapper modelMapper) {
         this.safetyReportRepository = safetyReportRepository;
+        this.evidenceRepository = evidenceRepository;
+        this.cloudinaryService = cloudinaryService;
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
@@ -37,18 +43,38 @@ public class SafetyReportServiceImpl implements SafetyReportService {
 
     @Override
     public SafetyReportSendServiceModel sendSafetyReport(SafetyReportSendBindingModel safetyReportSendBindingModel,
-                                                         String ownerUsername) {
+                                                         String ownerUsername) throws IOException {
 
         UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow();
+
+        // Evidence - start
+
+        EvidenceEntity firstEvidence = createEvidenceEntity(safetyReportSendBindingModel.getFirstEvidence());
+        evidenceRepository.save(firstEvidence);
+        EvidenceEntity savedEvidence = evidenceRepository.findByUrl(firstEvidence.getUrl()).orElseThrow();
+
+        // Evidence - end
+
         SafetyReportSendServiceModel safetyReportSendServiceModel =
                 modelMapper.map(safetyReportSendBindingModel, SafetyReportSendServiceModel.class);
 
         SafetyReportEntity newSafetyReport = modelMapper.map(safetyReportSendServiceModel, SafetyReportEntity.class);
         newSafetyReport.setSendBy(userEntity);
+        newSafetyReport.setEvidence(Set.of(savedEvidence));
 
         SafetyReportEntity sendSafetyReport = safetyReportRepository.save(newSafetyReport);
 
         return modelMapper.map(sendSafetyReport, SafetyReportSendServiceModel.class);
+    }
+
+    private EvidenceEntity createEvidenceEntity(MultipartFile evidence) throws IOException {
+        CloudinaryImage uploaded = cloudinaryService.upload(evidence);
+
+        EvidenceEntity evidenceEntity = new EvidenceEntity();
+        evidenceEntity.setPublicId(uploaded.getPublicId());
+        evidenceEntity.setUrl(uploaded.getUrl());
+
+        return evidenceEntity;
     }
 
     // DETAILS
