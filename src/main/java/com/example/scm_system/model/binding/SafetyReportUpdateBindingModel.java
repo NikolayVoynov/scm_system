@@ -2,6 +2,7 @@ package com.example.scm_system.model.binding;
 
 import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,9 @@ public class SafetyReportUpdateBindingModel {
     private LocalDateTime occurrenceDateTime;
     private String description;
     private StatusSafetyReportEnum status;
+    private MultipartFile firstEvidence;
+    private MultipartFile secondEvidence;
+    private MultipartFile thirdEvidence;
 //    private Set<EvidenceEntity> evidence;
 
 
@@ -61,5 +65,29 @@ public class SafetyReportUpdateBindingModel {
 
     public void setStatus(StatusSafetyReportEnum status) {
         this.status = status;
+    }
+
+    public MultipartFile getFirstEvidence() {
+        return firstEvidence;
+    }
+
+    public void setFirstEvidence(MultipartFile firstEvidence) {
+        this.firstEvidence = firstEvidence;
+    }
+
+    public MultipartFile getSecondEvidence() {
+        return secondEvidence;
+    }
+
+    public void setSecondEvidence(MultipartFile secondEvidence) {
+        this.secondEvidence = secondEvidence;
+    }
+
+    public MultipartFile getThirdEvidence() {
+        return thirdEvidence;
+    }
+
+    public void setThirdEvidence(MultipartFile thirdEvidence) {
+        this.thirdEvidence = thirdEvidence;
     }
 }

@@ -67,7 +67,7 @@ public class SafetyReportEntity extends BaseEntity {
         this.status = status;
     }
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     public Set<EvidenceEntity> getEvidence() {
         return evidence;
     }

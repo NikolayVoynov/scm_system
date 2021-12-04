@@ -22,6 +22,8 @@ public class SafetyReportSendBindingModel {
     private String description;
     private StatusSafetyReportEnum status;
     private MultipartFile firstEvidence;
+    private MultipartFile secondEvidence;
+    private MultipartFile thirdEvidence;
 //    private Set<EvidenceEntity> evidence;
 
 
@@ -76,5 +78,21 @@ public class SafetyReportSendBindingModel {
 
     public void setFirstEvidence(MultipartFile firstEvidence) {
         this.firstEvidence = firstEvidence;
+    }
+
+    public MultipartFile getSecondEvidence() {
+        return secondEvidence;
+    }
+
+    public void setSecondEvidence(MultipartFile secondEvidence) {
+        this.secondEvidence = secondEvidence;
+    }
+
+    public MultipartFile getThirdEvidence() {
+        return thirdEvidence;
+    }
+
+    public void setThirdEvidence(MultipartFile thirdEvidence) {
+        this.thirdEvidence = thirdEvidence;
     }
 }

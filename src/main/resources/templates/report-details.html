@@ -7,7 +7,7 @@
 <main>
     <div class="container-fluid">
         <h3 class="text-center mt-2"><span class="badge badge-dark">Safety Report Details</span></h3>
-        <hr class="hr-3 col-md-5 bg-white"/>
+        <hr class="hr-3 col-md-4 bg-white"/>
         <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded"
               th:object="${safetyReport}">
 
@@ -34,6 +34,9 @@
                     </form>
                 </div>
             </div>
+            <section class="evidence">
+                <img class="rounded" th:each="e : *{evidence}"  th:src="${e.url}" height="100%" alt="">
+            </section>
 
 
             <!-- Look in gallery html code for Pathfinder -->

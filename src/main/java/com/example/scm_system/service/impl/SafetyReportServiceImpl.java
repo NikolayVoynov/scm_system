@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class SafetyReportServiceImpl implements SafetyReportService {
@@ -49,9 +47,43 @@ public class SafetyReportServiceImpl implements SafetyReportService {
 
         // Evidence - start
 
-        EvidenceEntity firstEvidence = createEvidenceEntity(safetyReportSendBindingModel.getFirstEvidence());
-        evidenceRepository.save(firstEvidence);
-        EvidenceEntity savedEvidence = evidenceRepository.findByUrl(firstEvidence.getUrl()).orElseThrow();
+        EvidenceEntity firstSavedEvidence = null;
+        EvidenceEntity secondSavedEvidence = null;
+        EvidenceEntity thirdSavedEvidence = null;
+
+        if (safetyReportSendBindingModel.getFirstEvidence() != null) {
+            EvidenceEntity firstEvidence = createEvidenceEntity(safetyReportSendBindingModel.getFirstEvidence());
+            evidenceRepository.save(firstEvidence);
+
+            firstSavedEvidence = evidenceRepository.findByUrl(firstEvidence.getUrl()).orElseThrow();
+        }
+
+        if (safetyReportSendBindingModel.getSecondEvidence() != null) {
+            EvidenceEntity secondEvidence = createEvidenceEntity(safetyReportSendBindingModel.getSecondEvidence());
+            evidenceRepository.save(secondEvidence);
+
+            secondSavedEvidence = evidenceRepository.findByUrl(secondEvidence.getUrl()).orElseThrow();
+        }
+
+        if (safetyReportSendBindingModel.getThirdEvidence() != null) {
+            EvidenceEntity thirdEvidence = createEvidenceEntity(safetyReportSendBindingModel.getThirdEvidence());
+            evidenceRepository.save(thirdEvidence);
+
+            thirdSavedEvidence = evidenceRepository.findByUrl(thirdEvidence.getUrl()).orElseThrow();
+        }
+
+        List<EvidenceEntity> listEvidence = new ArrayList<>();
+        listEvidence.add(firstSavedEvidence);
+        listEvidence.add(secondSavedEvidence);
+        listEvidence.add(thirdSavedEvidence);
+
+        Set<EvidenceEntity> setEvidence = new HashSet<>();
+
+        for (EvidenceEntity evidence : listEvidence) {
+            if (evidence != null) {
+                setEvidence.add(evidence);
+            }
+        }
 
         // Evidence - end
 
@@ -60,7 +92,7 @@ public class SafetyReportServiceImpl implements SafetyReportService {
 
         SafetyReportEntity newSafetyReport = modelMapper.map(safetyReportSendServiceModel, SafetyReportEntity.class);
         newSafetyReport.setSendBy(userEntity);
-        newSafetyReport.setEvidence(Set.of(savedEvidence));
+        newSafetyReport.setEvidence(setEvidence);
 
         SafetyReportEntity sendSafetyReport = safetyReportRepository.save(newSafetyReport);
 

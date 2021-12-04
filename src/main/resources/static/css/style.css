@@ -83,3 +83,14 @@ footer ul a{
     position: sticky;
     left: 0;
 }
+
+.evidence {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.evidence img {
+    width: 100%;
+    box-shadow: var(--shadow);
+}
