@@ -5,14 +5,14 @@ import com.example.scm_system.model.service.UserRegistrationServiceModel;
 import com.example.scm_system.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/users")
@@ -40,7 +40,7 @@ public class UserRegisterController {
     public String register(
             @Valid UserRegisterBindingModel userRegisterBindingModel,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors() ||
                 !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
@@ -56,6 +56,14 @@ public class UserRegisterController {
         userService.registerAndLoginUser(userRegistrationServiceModel);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model, Principal principal) {
+
+        model.addAttribute("userProfile", userService.findByUsername(principal.getName()));
+
+        return "profile";
     }
 
 }

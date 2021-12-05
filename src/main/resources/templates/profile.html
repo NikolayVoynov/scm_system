@@ -7,20 +7,21 @@
 <main>
     <h3 class="text-center mt-2"><span class="badge badge-dark">Profile</span></h3>
     <hr class="hr-3 col-md-3 bg-white"/>
-    <form class="mx-auto col-md-3 justify-content-center bg-blur rounded" method="" action="/">
+    <form class="mx-auto col-md-3 justify-content-center bg-blur rounded"
+          th:object="${userProfile}">
         <div class="card bg-dark" style="width: 24rem;">
-            <div class="text-center"><img src="..." class="card-img-top rounded-circle" alt="..."></div>
+            <div class="text-center"><img th:src="*{profilePhoto.url}" class="card-img-top rounded-circle" alt="profilePhoto"></div>
             <div class="card-body border-white">
-                <h5 class="card-title" th:text="|  |">Full name</h5>
-                <h6 class="card-title" th:text="|  |">Role</h6>
+                <h5 class="card-title" th:text="|Full name: *{firstName} *{lastName}|">Full name</h5>
+<!--                <h6 class="card-title" th:text="|  |">Role</h6>-->
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-dark" th:text="|Company Position:|">Company Position:</li>
-                <li class="list-group-item bg-dark" th:text="|Username:|">Username:</li>
-                <li class="list-group-item bg-dark" th:text="|Company Email:|">Company Email:</li>
+                <li class="list-group-item bg-dark" th:text="|Company Position: *{companyPosition}|">Company Position:</li>
+                <li class="list-group-item bg-dark" th:text="|Username: *{username}|">Username:</li>
+                <li class="list-group-item bg-dark" th:text="|Company Email: *{email}|">Company Email:</li>
             </ul>
             <div class="card-body">
-                <a href="#" class="btn btn-primary">Back</a>
+                <a th:href="@{/}" class="btn btn-primary">Back</a>
             </div>
         </div>
     </form>

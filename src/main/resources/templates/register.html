@@ -10,15 +10,18 @@
     <form class="mx-auto col-md-8 d-flex flex-column justify-content-center bg-blur rounded"
           th:method="post"
           th:action="@{/users/register}"
-          th:object="${userRegisterBindingModel}">
+          th:object="${userRegisterBindingModel}"
+          enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="firstname" class="h6 mb-2 text-white">First name</label>
                 </div>
-                <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control" id="firstname"
+                <input th:field="*{firstName}" th:errorclass="is-invalid" type="text" class="form-control"
+                       id="firstname"
                        name="firstname"/>
-                <small class="invalid-feedback text-danger">First name length must be between 3 and 20 characters</small>
+                <small class="invalid-feedback text-danger">First name length must be between 3 and 20
+                    characters</small>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <div class="label-holder textCol d-flex justify-content-center">
@@ -52,9 +55,15 @@
                 <div class="label-holder textCol d-flex justify-content-center">
                     <label for="position" class="h6 mb-2 text-white">Company position</label>
                 </div>
-                <input th:field="*{companyPosition}" th:errorclass="is-invalid" type="text" class="form-control" id="position"
+                <input th:field="*{companyPosition}" th:errorclass="is-invalid" type="text" class="form-control"
+                       id="position"
                        name="position"/>
                 <small class="invalid-feedback text-danger">Company position cannot be empty</small>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center h6 mb-2 text-white" for="profilePhoto">Profile photo</label>
+                <input name="profilePhoto" id="profilePhoto" type="file" class="form-control"
+                       placeholder="Upload profile photo">
             </div>
         </div>
         <div class="row">
@@ -62,7 +71,8 @@
                 <div class="label-holder  textCol d-flex justify-content-center">
                     <label for="password" class="h6 mb-2 text-white">Password</label>
                 </div>
-                <input th:field="*{password}" th:errorclass="is-invalid" type="password" class="form-control" id="password"
+                <input th:field="*{password}" th:errorclass="is-invalid" type="password" class="form-control"
+                       id="password"
                        name="password"/>
                 <small class="invalid-feedback text-danger">Password length must be between 3 and 20 characters</small>
             </div>
@@ -70,18 +80,10 @@
                 <div class="label-holder  textCol d-flex justify-content-center">
                     <label for="confirmPassword" class="h6 mb-2">Confirm Password</label>
                 </div>
-                <input th:field="*{confirmPassword}" type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
+                <input th:field="*{confirmPassword}" type="password" class="form-control" id="confirmPassword"
+                       name="confirmPassword"/>
             </div>
         </div>
-<!--        <div class="row">-->
-<!--            <div class="form-group col-md-6 mb-3">-->
-<!--                <div class="label-holder  textCol d-flex justify-content-center">-->
-<!--                    <label for="profilePhoto" class="h6 mb-2">Profile photo</label>-->
-<!--                </div>-->
-<!--                <input th:field="" class="form-control" id="profilePhoto" name="profilePhoto"/>-->
-<!--                <small class="invalid-feedback text-danger">Profile photo cannot be empty</small>-->
-<!--            </div>-->
-<!--        </div>-->
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" class="btn mb-3 btn-primary" value="Submit">Register</button>
         </div>

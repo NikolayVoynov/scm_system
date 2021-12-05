@@ -2,6 +2,7 @@ package com.example.scm_system.model.service;
 
 
 import com.example.scm_system.model.entity.RoleEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UserRegistrationServiceModel {
 
@@ -13,7 +14,7 @@ public class UserRegistrationServiceModel {
     private String email;
     private RoleEntity role;
     private String companyPosition;
-//    private ProfilePhotosEntity profilePhoto;
+    private MultipartFile profilePhoto;
 
     public Long getId() {
         return id;
@@ -79,11 +80,11 @@ public class UserRegistrationServiceModel {
         this.companyPosition = companyPosition;
     }
 
-//    public ProfilePhotosEntity getProfilePhoto() {
-//        return profilePhoto;
-//    }
-//
-//    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
-//        this.profilePhoto = profilePhoto;
-//    }
+    public MultipartFile getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(MultipartFile profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
 }

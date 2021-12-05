@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity{
+public class UserEntity extends BaseEntity {
 
     private String firstName;
     private String lastName;
@@ -14,7 +14,7 @@ public class UserEntity extends BaseEntity{
     private String email;
     private Set<RoleEntity> roles;
     private String companyPosition;
-//    private ProfilePhotosEntity profilePhoto;
+    private ProfilePhotoEntity profilePhoto;
     private boolean isActive;
 
 
@@ -84,14 +84,14 @@ public class UserEntity extends BaseEntity{
         this.companyPosition = companyPosition;
     }
 
-//    @OneToOne
-//    public ProfilePhotosEntity getProfilePhoto() {
-//        return profilePhoto;
-//    }
-//
-//    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
-//        this.profilePhoto = profilePhoto;
-//    }
+    @OneToOne
+    public ProfilePhotoEntity getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(ProfilePhotoEntity profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
 
     public boolean isActive() {
         return isActive;

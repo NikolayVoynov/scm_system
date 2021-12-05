@@ -1,11 +1,9 @@
 package com.example.scm_system.model.binding;
 
 
-import com.example.scm_system.model.entity.RoleEntity;
 import com.example.scm_system.model.validator.UniqueUsername;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -20,7 +18,7 @@ public class UserRegisterBindingModel {
     private String confirmPassword;
     private String email;
     private String companyPosition;
-//    private ProfilePhotosEntity profilePhoto;
+    private MultipartFile profilePhoto;
 
 
     @NotNull
@@ -93,12 +91,11 @@ public class UserRegisterBindingModel {
         this.companyPosition = companyPosition;
     }
 
-//    @NotBlank
-//    public ProfilePhotosEntity getProfilePhoto() {
-//        return profilePhoto;
-//    }
-//
-//    public void setProfilePhoto(ProfilePhotosEntity profilePhoto) {
-//        this.profilePhoto = profilePhoto;
-//    }
+    public MultipartFile getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(MultipartFile profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
 }

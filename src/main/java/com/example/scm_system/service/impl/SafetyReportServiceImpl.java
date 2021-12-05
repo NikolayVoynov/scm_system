@@ -77,11 +77,11 @@ public class SafetyReportServiceImpl implements SafetyReportService {
         listEvidence.add(secondSavedEvidence);
         listEvidence.add(thirdSavedEvidence);
 
-        Set<EvidenceEntity> setEvidence = new HashSet<>();
+        Set<EvidenceEntity> setOfEvidence = new HashSet<>();
 
         for (EvidenceEntity evidence : listEvidence) {
             if (evidence != null) {
-                setEvidence.add(evidence);
+                setOfEvidence.add(evidence);
             }
         }
 
@@ -92,7 +92,7 @@ public class SafetyReportServiceImpl implements SafetyReportService {
 
         SafetyReportEntity newSafetyReport = modelMapper.map(safetyReportSendServiceModel, SafetyReportEntity.class);
         newSafetyReport.setSendBy(userEntity);
-        newSafetyReport.setEvidence(setEvidence);
+        newSafetyReport.setEvidence(setOfEvidence);
 
         SafetyReportEntity sendSafetyReport = safetyReportRepository.save(newSafetyReport);
 

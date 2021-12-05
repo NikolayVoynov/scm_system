@@ -1,14 +1,18 @@
 package com.example.scm_system.service.impl;
 
-import com.example.scm_system.model.entity.BaseEntity;
+import com.example.scm_system.model.entity.ProfilePhotoEntity;
 import com.example.scm_system.model.entity.RoleEntity;
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.RoleEnum;
 import com.example.scm_system.model.service.UserRegistrationServiceModel;
 import com.example.scm_system.model.service.UserUpdateRoleServiceModel;
+import com.example.scm_system.model.view.UserProfileViewModel;
 import com.example.scm_system.model.view.UserUpdateRoleViewModel;
+import com.example.scm_system.repository.ProfilePhotoRepository;
 import com.example.scm_system.repository.RoleRepository;
 import com.example.scm_system.repository.UserRepository;
+import com.example.scm_system.service.CloudinaryImage;
+import com.example.scm_system.service.CloudinaryService;
 import com.example.scm_system.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +21,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,17 +32,21 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final ProfilePhotoRepository profilePhotoRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;
     private final SystemUserDetailsServiceImpl systemUserDetailsService;
+    private final CloudinaryService cloudinaryService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, RoleRepository roleRepository, SystemUserDetailsServiceImpl systemUserDetailsService) {
+    public UserServiceImpl(UserRepository userRepository, ProfilePhotoRepository profilePhotoRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, RoleRepository roleRepository, SystemUserDetailsServiceImpl systemUserDetailsService, CloudinaryService cloudinaryService) {
         this.userRepository = userRepository;
+        this.profilePhotoRepository = profilePhotoRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
         this.roleRepository = roleRepository;
         this.systemUserDetailsService = systemUserDetailsService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -45,9 +55,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel) {
+    public void registerAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel) throws IOException {
 
         RoleEntity roleEntity = roleRepository.findByRole(RoleEnum.USER);
+
+        ProfilePhotoEntity profilePhotoEntity = createProfilePhotoEntity(userRegistrationServiceModel.getProfilePhoto());
+        profilePhotoRepository.save(profilePhotoEntity);
+        ProfilePhotoEntity savedProfilePhotoEntity = profilePhotoRepository.findByUrl(profilePhotoEntity.getUrl());
 
         UserEntity newUser = new UserEntity();
 
@@ -58,7 +72,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(userRegistrationServiceModel.getPassword()));
         newUser.setEmail(userRegistrationServiceModel.getEmail());
         newUser.setCompanyPosition(userRegistrationServiceModel.getCompanyPosition());
-        //       TODO set profile photo
+        newUser.setProfilePhoto(savedProfilePhotoEntity);
         newUser.setRoles(Set.of(roleEntity));
 
         newUser = userRepository.save(newUser);
@@ -71,6 +85,16 @@ public class UserServiceImpl implements UserService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+    }
+
+    private ProfilePhotoEntity createProfilePhotoEntity(MultipartFile profilePhoto) throws IOException {
+        CloudinaryImage uploaded = cloudinaryService.upload(profilePhoto);
+
+        ProfilePhotoEntity profilePhotoEntity = new ProfilePhotoEntity();
+        profilePhotoEntity.setPublicId(uploaded.getPublicId());
+        profilePhotoEntity.setUrl(uploaded.getUrl());
+
+        return profilePhotoEntity;
     }
 
     @Override
@@ -118,5 +142,12 @@ public class UserServiceImpl implements UserService {
             userRepository.save(admin);
 
         }
+    }
+
+    @Override
+    public UserProfileViewModel findByUsername(String currentUser) {
+        UserEntity userEntity = userRepository.findByUsername(currentUser).orElseThrow();
+
+        return modelMapper.map(userEntity, UserProfileViewModel.class);
     }
 }
