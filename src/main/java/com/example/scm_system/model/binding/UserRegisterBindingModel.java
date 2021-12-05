@@ -1,7 +1,7 @@
 package com.example.scm_system.model.binding;
 
 
-import com.example.scm_system.model.validator.UniqueUsername;
+import com.example.scm_system.model.validation.UniqueUsername;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;

@@ -5,6 +5,7 @@ import com.example.scm_system.model.entity.enums.StatusNonconformityEnum;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,7 @@ public class NonconformityEntity extends BaseEntity{
     private AuditEntity audit;
     private StatusNonconformityEnum status;
 //    private Set<EvidenceEntity> evidence;
+    private List<CommentEntity> comments;
 
     public NonconformityEntity() {
     }
@@ -103,4 +105,13 @@ public class NonconformityEntity extends BaseEntity{
 //    public void setEvidence(Set<EvidenceEntity> evidence) {
 //        this.evidence = evidence;
 //    }
+
+    @OneToMany(mappedBy = "nonconformity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
+    }
 }

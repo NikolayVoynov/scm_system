@@ -1,6 +1,6 @@
 package com.example.scm_system.model.binding;
 
-import com.example.scm_system.model.validator.UniqueUsername;
+import com.example.scm_system.model.validation.UniqueUsername;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

@@ -1,10 +1,7 @@
 package com.example.scm_system.model.binding;
 
 import com.example.scm_system.model.entity.enums.RoleEnum;
-import com.example.scm_system.model.validator.UniqueUsername;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

@@ -14,6 +14,7 @@ public class CommentEntity extends BaseEntity{
     private Boolean approved;
     private LocalDateTime created;
     private String content;
+    private NonconformityEntity nonconformity;
     private UserEntity author;
 
     public CommentEntity() {
@@ -44,6 +45,15 @@ public class CommentEntity extends BaseEntity{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @ManyToOne
+    public NonconformityEntity getNonconformity() {
+        return nonconformity;
+    }
+
+    public void setNonconformity(NonconformityEntity nonconformity) {
+        this.nonconformity = nonconformity;
     }
 
     @ManyToOne
