@@ -7,7 +7,7 @@
 <main>
     <div class="container-fluid">
         <h3 class="text-center mt-2"><span class="badge badge-dark">Nonconformity Details</span></h3>
-        <hr class="hr-3 col-md-5 bg-white"/>
+        <hr class="hr-3 col-md-4 bg-white"/>
         <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded"
               th:object="${nonconformity}">
 
@@ -36,26 +36,49 @@
                     </form>
                 </div>
             </div>
+        </form>
 
+        <section class="comments">
+            <h3>Comments</h3>
 
-            <!-- Look in gallery html code for Pathfinder -->
+            <div>
+                <!-- Comments submission -->
+                <form
+                        id="commentForm"
+                        method=""
+                        action="">
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea name="message"
+                                  id="message"
+                                  cols="30"
+                                  rows="5"
+                                  class="form-control"
+                                  style="background-color: white;"></textarea>
+                        <small id="messageError" class="invalid-feedback">
+                            Message should be at least 10 characters.
+                        </small>
+                    </div>
 
-
-<!--            <section class="evidence">-->
-<!--                <h2 class="text-center text-white mt-5">Evidence</h2>-->
-<!--                <img th:each="" th:src="" width="200px" height="200px" alt="">-->
-<!--            </section>-->
-
-            <!-- for one picture evidence
-
-            <div th:object=""
-                 class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
-                <img class="card-img-top" th:src="*{getImageUrl()}" alt="Car image">
+                    <div class="form-group">
+                        <input type="submit"
+                               class="btn mb-3 btn-success"
+                               id="postComment"
+                               value="Post Comment"/>
+                    </div>
+                </form>
+                <!-- Comments submission -->
             </div>
 
-            -->
-        </form>
+            <!-- All comments section -->
+            <div>
+
+                <span id="commentCtnr"><!-- Comments section, filled in by script --></span>
+            </div>
+            <!-- EO: All comments section -->
+        </section>
     </div>
+    <script th:src="@{/js/comments.js}"></script>
 </main>
 <footer th:replace="fragments/commons::footer"></footer>
 </body>
