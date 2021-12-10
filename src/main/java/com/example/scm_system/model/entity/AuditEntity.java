@@ -4,6 +4,7 @@ import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class AuditEntity extends BaseEntity{
     private UserEntity performedBy;
     private StatusAuditEnum status;
     private Integer numberNonconformities;
-    private Set<NonconformityEntity> nonconformities;
+    private List<NonconformityEntity> nonconformities;
     private String conclusion;
 //    private Set<EvidenceEntity> evidence;
 
@@ -78,11 +79,11 @@ public class AuditEntity extends BaseEntity{
     }
 
     @OneToMany
-    public Set<NonconformityEntity> getNonconformities() {
+    public List<NonconformityEntity> getNonconformities() {
         return nonconformities;
     }
 
-    public void setNonconformities(Set<NonconformityEntity> nonconformities) {
+    public void setNonconformities(List<NonconformityEntity> nonconformities) {
         this.nonconformities = nonconformities;
     }
 

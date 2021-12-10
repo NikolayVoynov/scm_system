@@ -8,6 +8,7 @@ import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
 import com.example.scm_system.model.view.AuditDetailsViewModel;
 import com.example.scm_system.service.AuditService;
+import com.example.scm_system.service.NonconformityService;
 import com.example.scm_system.service.impl.SystemUserSpring;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,10 +25,14 @@ import java.security.Principal;
 @Controller
 public class AuditsController {
 
+    private final NonconformityService nonconformityService;
     private final AuditService auditService;
     private final ModelMapper modelMapper;
 
-    public AuditsController(AuditService auditService, ModelMapper modelMapper) {
+    public AuditsController(NonconformityService nonconformityService,
+                            AuditService auditService,
+                            ModelMapper modelMapper) {
+        this.nonconformityService = nonconformityService;
         this.auditService = auditService;
         this.modelMapper = modelMapper;
     }
@@ -132,6 +137,7 @@ public class AuditsController {
             throw new RuntimeException();
         }
 
+        nonconformityService.deleteNonconformityWithAuditId(id);
         auditService.deleteAudit(id);
 
         return "redirect:/dashboard";

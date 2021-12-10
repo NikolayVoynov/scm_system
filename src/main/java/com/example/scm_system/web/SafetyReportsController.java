@@ -119,10 +119,14 @@ public class SafetyReportsController {
 
     // DELETE
 
-    @PreAuthorize("isOwner(#id)")
-    @DeleteMapping("/reports/{id}")
-    public String deleteAudit(@PathVariable Long id,
+    @PreAuthorize("@safetyReportServiceImpl.isOwner(#principal.name, #id)")
+    @DeleteMapping("/reports/{id}/delete")
+    public String deleteSafetyReport(@PathVariable Long id,
                               Principal principal) {
+
+        if (!safetyReportService.isOwner(principal.getName(), id)) {
+            throw new RuntimeException();
+        }
 
         safetyReportService.deleteSafetyReport(id);
 

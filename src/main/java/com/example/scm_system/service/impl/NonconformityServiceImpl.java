@@ -132,12 +132,20 @@ public class NonconformityServiceImpl implements NonconformityService {
         nonconformityRepository.save(nonconformity);
     }
 
-    // DELETE
+    // DELETE NONCONFORMITY
 
     @Override
     public void deleteNonconformity(Long id) {
 
         nonconformityRepository.deleteById(id);
+    }
+
+    // DELETE AUDIT
+
+    @Override
+    public void deleteNonconformityWithAuditId(Long id) {
+
+        nonconformityRepository.deleteAllByAuditId(id);
     }
 
     // DASHBOARD
@@ -178,4 +186,6 @@ public class NonconformityServiceImpl implements NonconformityService {
 
         return nonconformities;
     }
+
+
 }

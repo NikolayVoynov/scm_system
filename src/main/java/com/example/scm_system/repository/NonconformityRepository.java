@@ -12,4 +12,6 @@ import java.util.List;
 public interface NonconformityRepository extends JpaRepository<NonconformityEntity, Long> {
 
     List<NonconformityEntity> findByRaisedBy(UserEntity raisedBy);
+
+    void deleteAllByAuditId(Long audit_id);
 }
