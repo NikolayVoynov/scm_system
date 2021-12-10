@@ -9,15 +9,21 @@ import com.example.scm_system.model.entity.enums.RoleEnum;
 import com.example.scm_system.model.service.NonconformityAddServiceModel;
 import com.example.scm_system.model.service.NonconformityUpdateServiceModel;
 import com.example.scm_system.model.view.NonconformityDetailsViewModel;
+import com.example.scm_system.model.view.SafetyReportDetailsViewModel;
 import com.example.scm_system.repository.AuditRepository;
 import com.example.scm_system.repository.NonconformityRepository;
 import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.NonconformityService;
+import com.example.scm_system.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NonconformityServiceImpl implements NonconformityService {
@@ -131,5 +137,44 @@ public class NonconformityServiceImpl implements NonconformityService {
     public void deleteNonconformity(Long id) {
 
         nonconformityRepository.deleteById(id);
+    }
+
+    // DASHBOARD
+
+    @Override
+    public List<NonconformityDetailsViewModel> findNonconformities(Principal user) {
+
+        UserEntity userEntity = userRepository.findByUsername(user.getName()).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + user.getName() + " not found!"));
+
+        boolean isAdmin = isAdmin(userEntity);
+
+        List<NonconformityDetailsViewModel> nonconformities = new ArrayList<>();
+
+        if (isAdmin) {
+            nonconformities = nonconformityRepository.
+                    findAll().
+                    stream().
+                    map(nonconformityEntity -> {
+                      NonconformityDetailsViewModel nonconformityDetailsViewModel = modelMapper.map(nonconformityEntity, NonconformityDetailsViewModel.class);
+                      nonconformityDetailsViewModel.setRaisedBy(nonconformityEntity.getRaisedBy().getUsername());
+
+                      return nonconformityDetailsViewModel;
+                    }).
+                    collect(Collectors.toList());
+        } else {
+            nonconformities = nonconformityRepository.
+                    findByRaisedBy(userEntity).
+                    stream().
+                    map(nonconformityEntity -> {
+                        NonconformityDetailsViewModel nonconformityDetailsViewModel = modelMapper.map(nonconformityEntity, NonconformityDetailsViewModel.class);
+                        nonconformityDetailsViewModel.setRaisedBy(nonconformityEntity.getRaisedBy().getUsername());
+
+                        return nonconformityDetailsViewModel;
+                    }).
+                    collect(Collectors.toList());
+        }
+
+        return nonconformities;
     }
 }

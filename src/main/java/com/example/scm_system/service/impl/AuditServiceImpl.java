@@ -9,12 +9,16 @@ import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
 import com.example.scm_system.model.view.AuditDetailsViewModel;
 import com.example.scm_system.model.view.AuditNonconformityViewModel;
+import com.example.scm_system.model.view.SafetyReportDetailsViewModel;
 import com.example.scm_system.repository.AuditRepository;
 import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.AuditService;
+import com.example.scm_system.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -134,6 +138,44 @@ public class AuditServiceImpl implements AuditService {
 
                     return auditNonconformityViewModel;
                 }).collect(Collectors.toList());
+    }
+
+    // DASHBOARD
+
+    @Override
+    public List<AuditDetailsViewModel> findAudits(Principal user) {
+        UserEntity userEntity = userRepository.findByUsername(user.getName()).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + user.getName() + " not found!"));
+
+        boolean isAdmin = isAdmin(userEntity);
+
+        List<AuditDetailsViewModel> audits = new ArrayList<>();
+
+        if (isAdmin) {
+            audits = auditRepository.
+                    findAll().
+                    stream().
+                    map(auditEntity -> {
+                        AuditDetailsViewModel auditDetailsViewModel = modelMapper.map(auditEntity, AuditDetailsViewModel.class);
+                        auditDetailsViewModel.setPerformedBy(auditEntity.getPerformedBy().getUsername());
+
+                        return auditDetailsViewModel;
+                    }).
+                    collect(Collectors.toList());
+        } else {
+            audits = auditRepository.
+                    findByPerformedBy(userEntity).
+                    stream().
+                    map(auditEntity -> {
+                        AuditDetailsViewModel auditDetailsViewModel = modelMapper.map(auditEntity, AuditDetailsViewModel.class);
+                        auditDetailsViewModel.setPerformedBy(auditEntity.getPerformedBy().getUsername());
+
+                        return auditDetailsViewModel;
+                    }).
+                    collect(Collectors.toList());
+        }
+
+        return audits;
     }
 
 

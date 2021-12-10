@@ -12,12 +12,15 @@ import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.CloudinaryImage;
 import com.example.scm_system.service.CloudinaryService;
 import com.example.scm_system.service.SafetyReportService;
+import com.example.scm_system.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SafetyReportServiceImpl implements SafetyReportService {
@@ -162,7 +165,7 @@ public class SafetyReportServiceImpl implements SafetyReportService {
 
         SafetyReportEntity safetyReportEntity =
                 safetyReportRepository.findById(safetyReportUpdateServiceModel.getId()).orElseThrow(() ->
-                        new NoSuchElementException("Safety Report with id " + safetyReportUpdateServiceModel.getId() + " not found!"));
+                        new ObjectNotFoundException("Safety Report with id " + safetyReportUpdateServiceModel.getId() + " not found!"));
 
         safetyReportEntity.setTopic(safetyReportUpdateServiceModel.getTopic());
         safetyReportEntity.setOccurrenceDateTime(safetyReportUpdateServiceModel.getOccurrenceDateTime());
@@ -178,6 +181,45 @@ public class SafetyReportServiceImpl implements SafetyReportService {
     @Override
     public void deleteSafetyReport(Long id) {
         safetyReportRepository.deleteById(id);
+    }
+
+
+    // DASHBOARD
+
+    @Override
+    public List<SafetyReportDetailsViewModel> findSafetyReports(Principal user) {
+        UserEntity userEntity = userRepository.findByUsername(user.getName()).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + user.getName() + " not found!"));
+
+        boolean isAdmin = isAdmin(userEntity);
+
+        List<SafetyReportDetailsViewModel> safetyReports = new ArrayList<>();
+
+        if (isAdmin) {
+            safetyReports = safetyReportRepository.
+                    findAll().
+                    stream().
+                    map(safetyReportEntity -> {
+                        SafetyReportDetailsViewModel reportDetailsViewModel = modelMapper.map(safetyReportEntity, SafetyReportDetailsViewModel.class);
+                        reportDetailsViewModel.setSendBy(safetyReportEntity.getSendBy().getUsername());
+
+                        return reportDetailsViewModel;
+                    }).
+                    collect(Collectors.toList());
+        } else {
+            safetyReports = safetyReportRepository.
+                    findBySendBy(userEntity).
+                    stream().
+                    map(safetyReportEntity -> {
+                        SafetyReportDetailsViewModel reportDetailsViewModel = modelMapper.map(safetyReportEntity, SafetyReportDetailsViewModel.class);
+                        reportDetailsViewModel.setSendBy(safetyReportEntity.getSendBy().getUsername());
+
+                        return reportDetailsViewModel;
+                    }).
+                    collect(Collectors.toList());
+        }
+
+        return safetyReports;
     }
 
 

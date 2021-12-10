@@ -5,6 +5,9 @@ import com.example.scm_system.model.service.NonconformityAddServiceModel;
 import com.example.scm_system.model.service.NonconformityUpdateServiceModel;
 import com.example.scm_system.model.view.NonconformityDetailsViewModel;
 
+import java.security.Principal;
+import java.util.List;
+
 public interface NonconformityService {
     NonconformityAddServiceModel addNonconformity(NonconformityAddBindingModel nonconformityAddBindingModel, String ownerUsername);
 
@@ -15,4 +18,6 @@ public interface NonconformityService {
     void updateNonconformity(NonconformityUpdateServiceModel nonconformityUpdateServiceModel);
 
     void deleteNonconformity(Long id);
+
+    List<NonconformityDetailsViewModel> findNonconformities(Principal user);
 }

@@ -6,6 +6,7 @@ import com.example.scm_system.model.service.AuditUpdateServiceModel;
 import com.example.scm_system.model.view.AuditDetailsViewModel;
 import com.example.scm_system.model.view.AuditNonconformityViewModel;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface AuditService {
@@ -20,4 +21,7 @@ public interface AuditService {
     void updateAudit(AuditUpdateServiceModel auditUpdateServiceModel);
 
     List<AuditNonconformityViewModel> getAllAudits();
+
+    List<AuditDetailsViewModel> findAudits(Principal user);
+
 }
