@@ -3,6 +3,7 @@ package com.example.scm_system.service.impl;
 
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.repository.UserRepository;
+import com.example.scm_system.service.exceptions.ObjectNotFoundException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,7 @@ public class SystemUserDetailsServiceImpl implements UserDetailsService {
 
         UserEntity userEntity =
                 userRepository.findByUsername(username).
-                        orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found!"));
+                        orElseThrow(() -> new ObjectNotFoundException("User with username " + username + " not found!"));
 
         UserDetails userDetails = mapUserEntityToUserDetails(userEntity);
 

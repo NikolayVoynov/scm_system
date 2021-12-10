@@ -14,6 +14,7 @@ import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.CloudinaryImage;
 import com.example.scm_system.service.CloudinaryService;
 import com.example.scm_system.service.UserService;
+import com.example.scm_system.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -111,7 +112,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserRole(UserUpdateRoleServiceModel userUpdateRoleServiceModel) {
 
-        UserEntity currentUserEntity = userRepository.findByUsername(userUpdateRoleServiceModel.getUsername()).orElseThrow();
+        UserEntity currentUserEntity = userRepository.findByUsername(userUpdateRoleServiceModel.getUsername()).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + userUpdateRoleServiceModel.getUsername() + " not found!"));
         RoleEntity newRole = roleRepository.findByRole(userUpdateRoleServiceModel.getRole());
 
         List<RoleEntity> currentRoles = currentUserEntity.getRoles().stream().toList();
@@ -146,7 +148,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfileViewModel findByUsername(String currentUser) {
-        UserEntity userEntity = userRepository.findByUsername(currentUser).orElseThrow();
+        UserEntity userEntity = userRepository.findByUsername(currentUser).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + currentUser + " not found!"));
 
         return modelMapper.map(userEntity, UserProfileViewModel.class);
     }

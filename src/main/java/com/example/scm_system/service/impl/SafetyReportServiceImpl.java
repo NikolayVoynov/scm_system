@@ -46,7 +46,8 @@ public class SafetyReportServiceImpl implements SafetyReportService {
     public SafetyReportSendServiceModel sendSafetyReport(SafetyReportSendBindingModel safetyReportSendBindingModel,
                                                          String ownerUsername) throws IOException {
 
-        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow();
+        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + ownerUsername + " not found!"));
 
         // Evidence - start
 
@@ -58,21 +59,24 @@ public class SafetyReportServiceImpl implements SafetyReportService {
             EvidenceEntity firstEvidence = createEvidenceEntity(safetyReportSendBindingModel.getFirstEvidence());
             evidenceRepository.save(firstEvidence);
 
-            firstSavedEvidence = evidenceRepository.findByUrl(firstEvidence.getUrl()).orElseThrow();
+            firstSavedEvidence = evidenceRepository.findByUrl(firstEvidence.getUrl()).orElseThrow(() ->
+                    new ObjectNotFoundException("First evidence not found!"));
         }
 
         if (safetyReportSendBindingModel.getSecondEvidence() != null) {
             EvidenceEntity secondEvidence = createEvidenceEntity(safetyReportSendBindingModel.getSecondEvidence());
             evidenceRepository.save(secondEvidence);
 
-            secondSavedEvidence = evidenceRepository.findByUrl(secondEvidence.getUrl()).orElseThrow();
+            secondSavedEvidence = evidenceRepository.findByUrl(secondEvidence.getUrl()).orElseThrow(() ->
+                    new ObjectNotFoundException("Second evidence not found!"));
         }
 
         if (safetyReportSendBindingModel.getThirdEvidence() != null) {
             EvidenceEntity thirdEvidence = createEvidenceEntity(safetyReportSendBindingModel.getThirdEvidence());
             evidenceRepository.save(thirdEvidence);
 
-            thirdSavedEvidence = evidenceRepository.findByUrl(thirdEvidence.getUrl()).orElseThrow();
+            thirdSavedEvidence = evidenceRepository.findByUrl(thirdEvidence.getUrl()).orElseThrow(() ->
+                    new ObjectNotFoundException("Third evidence not found!"));
         }
 
         List<EvidenceEntity> listEvidence = new ArrayList<>();

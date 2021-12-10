@@ -42,7 +42,8 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public AuditAddServiceModel addAudit(AuditAddBindingModel auditAddBindingModel, String ownerUsername) {
 
-        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow();
+        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + ownerUsername + " not found!"));
         AuditAddServiceModel auditAddServiceModel = modelMapper.map(auditAddBindingModel, AuditAddServiceModel.class);
         AuditEntity newAudit = modelMapper.map(auditAddServiceModel, AuditEntity.class);
         newAudit.setPerformedBy(userEntity);
@@ -104,8 +105,9 @@ public class AuditServiceImpl implements AuditService {
     public void updateAudit(AuditUpdateServiceModel auditUpdateServiceModel) {
 
         AuditEntity auditEntity =
-                auditRepository.findById(auditUpdateServiceModel.getId()).orElseThrow(() ->
-                        new NoSuchElementException("Audit with id " + auditUpdateServiceModel.getId() + " not found!"));
+                auditRepository.findById(auditUpdateServiceModel.getId()).orElseThrow(
+                        () ->
+                                new ObjectNotFoundException("Audit with id " + auditUpdateServiceModel.getId() + " not found!"));
 
         auditEntity.setRefNumber(auditUpdateServiceModel.getRefNumber());
         auditEntity.setTopic(auditUpdateServiceModel.getTopic());

@@ -47,7 +47,8 @@ public class NonconformityServiceImpl implements NonconformityService {
     public NonconformityAddServiceModel addNonconformity(NonconformityAddBindingModel nonconformityAddBindingModel,
                                                          String ownerUsername) {
 
-        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow();
+        UserEntity userEntity = userRepository.findByUsername(ownerUsername).orElseThrow(() ->
+                new ObjectNotFoundException("User with username " + ownerUsername + " not found!"));
         NonconformityAddServiceModel nonconformityAddServiceModel =
                 modelMapper.map(nonconformityAddBindingModel, NonconformityAddServiceModel.class);
         NonconformityEntity newNonconformity = modelMapper.map(nonconformityAddServiceModel, NonconformityEntity.class);
@@ -117,7 +118,7 @@ public class NonconformityServiceImpl implements NonconformityService {
 
         NonconformityEntity nonconformity =
                 nonconformityRepository.findById(nonconformityUpdateServiceModel.getId()).orElseThrow(() ->
-                        new NoSuchElementException("Nonconformity with id " + nonconformityUpdateServiceModel.getId() + " not found!"));
+                        new ObjectNotFoundException("Nonconformity with id " + nonconformityUpdateServiceModel.getId() + " not found!"));
 
         AuditEntity auditEntity = auditRepository.findByRefNumber(nonconformityUpdateServiceModel.getAuditRefNumber());
         nonconformity.setAudit(auditEntity);
