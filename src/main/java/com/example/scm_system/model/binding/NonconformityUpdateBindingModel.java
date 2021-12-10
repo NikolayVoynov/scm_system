@@ -2,7 +2,12 @@ package com.example.scm_system.model.binding;
 
 import com.example.scm_system.model.entity.enums.LevelNonconformityEnum;
 import com.example.scm_system.model.entity.enums.StatusNonconformityEnum;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 public class NonconformityUpdateBindingModel {
@@ -26,6 +31,7 @@ public class NonconformityUpdateBindingModel {
         this.id = id;
     }
 
+    @NotNull
     public String getRefNumber() {
         return refNumber;
     }
@@ -34,6 +40,7 @@ public class NonconformityUpdateBindingModel {
         this.refNumber = refNumber;
     }
 
+    @NotEmpty
     public String getDescription() {
         return description;
     }
@@ -42,6 +49,7 @@ public class NonconformityUpdateBindingModel {
         this.description = description;
     }
 
+    @NotNull
     public LevelNonconformityEnum getLevel() {
         return level;
     }
@@ -50,6 +58,8 @@ public class NonconformityUpdateBindingModel {
         this.level = level;
     }
 
+    @PastOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getRaisedDate() {
         return raisedDate;
     }
@@ -58,6 +68,8 @@ public class NonconformityUpdateBindingModel {
         this.raisedDate = raisedDate;
     }
 
+    @FutureOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getClosureDate() {
         return closureDate;
     }
@@ -66,6 +78,7 @@ public class NonconformityUpdateBindingModel {
         this.closureDate = closureDate;
     }
 
+    @NotNull
     public String getAuditRefNumber() {
         return auditRefNumber;
     }
@@ -74,6 +87,7 @@ public class NonconformityUpdateBindingModel {
         this.auditRefNumber = auditRefNumber;
     }
 
+    @NotNull
     public StatusNonconformityEnum getStatus() {
         return status;
     }

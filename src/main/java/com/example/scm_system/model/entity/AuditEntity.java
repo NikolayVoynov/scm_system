@@ -86,7 +86,7 @@ public class AuditEntity extends BaseEntity{
         this.nonconformities = nonconformities;
     }
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     public String getConclusion() {
         return conclusion;
     }

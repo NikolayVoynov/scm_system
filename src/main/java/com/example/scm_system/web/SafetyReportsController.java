@@ -115,7 +115,6 @@ public class SafetyReportsController {
         safetyReportService.updateSafetyReport(safetyReportUpdateServiceModel);
 
         return "redirect:/reports/" + id + "/details";
-
     }
 
     // DELETE
