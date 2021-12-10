@@ -14,4 +14,6 @@ public interface AuditRepository extends JpaRepository<AuditEntity, Long> {
     AuditEntity findByRefNumber(String refNumber);
 
     List<AuditEntity> findByPerformedBy(UserEntity performedBy);
+
+    void deleteById(Long id);
 }

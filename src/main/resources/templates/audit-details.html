@@ -9,8 +9,7 @@
         <h2 class="text-center mt-2"><span class="badge badge-dark">Audit Report Details</span></h2>
         <hr class="hr-3 col-md-5 bg-white"/>
         <form class="mx-auto col-md-4 d-flex flex-column justify-content-center bg-blur rounded"
-        th:object="${audit}"
-        >
+        th:object="${audit}">
 
             <h5 class="card-title" th:text="|Audit Ref.No: *{refNumber}|">Audit Ref.No:</h5>
             <hr class="hr-3 col-md-11 bg-white"/>
@@ -31,31 +30,11 @@
                 </div>
 
                 <div class="form-group col-md-3 mb-3" th:if="*{canDelete}">
-                    <form th:action="@{/audits/{id}(id=*{id})}" th:method="delete">
+                    <form th:action="@{/audits/{id}/delete(id=*{id})}" th:method="delete">
                         <input type="submit" class="btn mb-3 btn-danger" value="Delete">
                     </form>
                 </div>
             </div>
-
-
-            <!-- Look in gallery html code for Pathfinder
-
-
-            <section class="evidence">
-                <h2 class="text-center text-white mt-5">Evidence</h2>
-                <img th:each="" th:src="" width="200px" height="200px" alt="">
-            </section>
-
-            -->
-
-            <!-- for one picture evidence
-
-            <div th:object=""
-                 class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
-                <img class="card-img-top" th:src="*{getImageUrl()}" alt="Car image">
-            </div>
-
-            -->
         </form>
     </div>
 </main>

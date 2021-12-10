@@ -122,14 +122,19 @@ public class AuditsController {
 
     // DELETE
 
-    @PreAuthorize("isOwner(#id)")
-    @DeleteMapping("/audits/{id}")
+//    @PreAuthorize("isOwner(#id)")
+    @PreAuthorize("@auditServiceImpl.isOwner(#principal.name, #id)")
+    @DeleteMapping("/audits/{id}/delete")
     public String deleteAudit(@PathVariable Long id,
                               Principal principal) {
 
+        if (!auditService.isOwner(principal.getName(), id)) {
+            throw new RuntimeException();
+        }
+
         auditService.deleteAudit(id);
 
-        return "redirect:/users/home";
+        return "redirect:/dashboard";
     }
 
 
