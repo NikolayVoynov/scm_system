@@ -108,3 +108,8 @@ footer ul a{
     margin-right: 18%;
     margin-top: 20px;
 }
+
+.comments.form-control{
+    text-decoration-color: white;
+}
+
