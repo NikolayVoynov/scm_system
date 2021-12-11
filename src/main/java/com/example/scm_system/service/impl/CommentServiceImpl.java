@@ -1,12 +1,13 @@
 package com.example.scm_system.service.impl;
 
+import com.example.scm_system.model.entity.AuditEntity;
 import com.example.scm_system.model.entity.CommentEntity;
 import com.example.scm_system.model.entity.NonconformityEntity;
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.service.CommentServiceModel;
 import com.example.scm_system.model.view.CommentViewModel;
+import com.example.scm_system.repository.AuditRepository;
 import com.example.scm_system.repository.CommentRepository;
-import com.example.scm_system.repository.NonconformityRepository;
 import com.example.scm_system.repository.UserRepository;
 import com.example.scm_system.service.CommentService;
 import com.example.scm_system.service.exceptions.ObjectNotFoundException;
@@ -21,29 +22,29 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private final NonconformityRepository nonconformityRepository;
+    private final AuditRepository auditRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
 
-    public CommentServiceImpl(NonconformityRepository nonconformityRepository,
+    public CommentServiceImpl(AuditRepository auditRepository,
                               UserRepository userRepository,
                               CommentRepository commentRepository) {
-        this.nonconformityRepository = nonconformityRepository;
+        this.auditRepository = auditRepository;
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
     }
 
     @Transactional
     @Override
-    public List<CommentViewModel> getComments(Long nonconformityId) {
+    public List<CommentViewModel> getComments(Long auditId) {
 
-        NonconformityEntity nonconformityOptional =
-                nonconformityRepository.
-                        findById(nonconformityId).
+        AuditEntity auditOptional =
+                auditRepository.
+                        findById(auditId).
                         orElseThrow(() ->
-                                new ObjectNotFoundException("Nonconformity with id " + nonconformityId + " not found!"));
+                                new ObjectNotFoundException("Audit with id " + auditId + " not found!"));
 
-        return nonconformityOptional.
+        return auditOptional.
                 getComments().
                 stream().
                 map(this::mapsAsComment).
@@ -55,10 +56,10 @@ public class CommentServiceImpl implements CommentService {
 
         Objects.requireNonNull(commentServiceModel.getCreator());
 
-        NonconformityEntity nonconformity = nonconformityRepository.
-                findById(commentServiceModel.getNonconformityId()).
+        AuditEntity audit = auditRepository.
+                findById(commentServiceModel.getAuditId()).
                 orElseThrow(() ->
-                        new ObjectNotFoundException("Nonconformity with id " + commentServiceModel.getNonconformityId() + " not found!"));
+                        new ObjectNotFoundException("Audit with id " + commentServiceModel.getAuditId() + " not found!"));
 
         UserEntity author = userRepository.
                 findByUsername(commentServiceModel.getCreator()).
@@ -69,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
         newComment.setApproved(false);
         newComment.setContent(commentServiceModel.getMessage());
         newComment.setCreated(LocalDateTime.now());
-        newComment.setNonconformity(nonconformity);
+        newComment.setAudit(audit);
         newComment.setAuthor(author);
 
         CommentEntity savedComment = commentRepository.save(newComment);

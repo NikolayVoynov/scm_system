@@ -1,4 +1,4 @@
-const nonconformityId = document.getElementById('nonconformityId').value
+const auditId = document.getElementById('auditId').value
 
 const csrfHeaderName = document.head.querySelector('[name="_csrf_header"]').content;
 const csrfHeaderValue = document.head.querySelector('[name="_csrf"]').content;
@@ -86,7 +86,7 @@ function asComment(c) {
     return commentHtml
 }
 
-fetch(`http://localhost:8080/restapi/${nonconformityId}/comments`).
+fetch(`http://localhost:8080/restapi/${auditId}/comments`).
 then(response => response.json()).
 then(data => {
     for (let comment of data) {

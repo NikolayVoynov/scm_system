@@ -2,16 +2,16 @@ package com.example.scm_system.model.service;
 
 public class CommentServiceModel {
 
-    private Long nonconformityId;
+    private Long auditId;
     private String message;
     private String creator;
 
-    public Long getNonconformityId() {
-        return nonconformityId;
+    public Long getAuditId() {
+        return auditId;
     }
 
-    public void setNonconformityId(Long nonconformityId) {
-        this.nonconformityId = nonconformityId;
+    public void setAuditId(Long auditId) {
+        this.auditId = auditId;
     }
 
     public String getMessage() {

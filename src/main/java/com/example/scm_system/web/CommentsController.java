@@ -29,27 +29,27 @@ public class CommentsController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/restapi/{nonconformityId}/comments")
-    public ResponseEntity<List<CommentViewModel>> getComments(@PathVariable Long nonconformityId,
+    @GetMapping("/restapi/{auditId}/comments")
+    public ResponseEntity<List<CommentViewModel>> getComments(@PathVariable Long auditId,
                                                               Principal principal) {
 
-        return ResponseEntity.ok(commentService.getComments(nonconformityId));
+        return ResponseEntity.ok(commentService.getComments(auditId));
     }
 
-    @PostMapping("/restapi/{nonconformityId}/comments")
+    @PostMapping("/restapi/{auditId}/comments")
     public ResponseEntity<CommentViewModel> postComment(@AuthenticationPrincipal UserDetails principal,
-                                                        @PathVariable Long nonconformityId,
+                                                        @PathVariable Long auditId,
                                                         @RequestBody @Valid CommentBindingModel commentBindingModel) {
 
         CommentServiceModel commentServiceModel =
                 modelMapper.map(commentBindingModel, CommentServiceModel.class);
         commentServiceModel.setCreator(principal.getUsername());
-        commentServiceModel.setNonconformityId(nonconformityId);
+        commentServiceModel.setAuditId(auditId);
 
         CommentViewModel commentViewModel = commentService.createComment(commentServiceModel);
 
         URI locationOfComment =
-                URI.create(String.format("restapi/%s/comments/%s", nonconformityId, commentViewModel.getCommentId()));
+                URI.create(String.format("restapi/%s/comments/%s", auditId, commentViewModel.getCommentId()));
 
         return ResponseEntity.
                 created(locationOfComment).

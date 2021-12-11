@@ -127,7 +127,6 @@ public class AuditsController {
 
     // DELETE
 
-//    @PreAuthorize("isOwner(#id)")
     @PreAuthorize("@auditServiceImpl.isOwner(#principal.name, #id)")
     @DeleteMapping("/audits/{id}/delete")
     public String deleteAudit(@PathVariable Long id,

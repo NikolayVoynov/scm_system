@@ -20,7 +20,6 @@ public class NonconformityUpdateBindingModel {
     private LocalDate closureDate;
     private String auditRefNumber;
     private StatusNonconformityEnum status;
-    //    private Set<EvidenceEntity> evidence;
 
 
     public Long getId() {

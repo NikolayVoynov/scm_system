@@ -18,6 +18,7 @@ public class AuditEntity extends BaseEntity{
     private StatusAuditEnum status;
     private Integer numberNonconformities;
     private List<NonconformityEntity> nonconformities;
+    private List<CommentEntity> comments;
     private String conclusion;
 
 
@@ -84,6 +85,15 @@ public class AuditEntity extends BaseEntity{
 
     public void setNonconformities(List<NonconformityEntity> nonconformities) {
         this.nonconformities = nonconformities;
+    }
+
+    @OneToMany(mappedBy = "audit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
     }
 
     @Column(nullable = false, columnDefinition = "TEXT")

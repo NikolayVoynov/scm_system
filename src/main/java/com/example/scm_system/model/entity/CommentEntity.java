@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
-public class CommentEntity extends BaseEntity{
+public class CommentEntity extends BaseEntity {
 
     private Boolean approved;
     private LocalDateTime created;
     private String content;
-    private NonconformityEntity nonconformity;
+    private AuditEntity audit;
     private UserEntity author;
 
     public CommentEntity() {
@@ -48,12 +48,12 @@ public class CommentEntity extends BaseEntity{
     }
 
     @ManyToOne
-    public NonconformityEntity getNonconformity() {
-        return nonconformity;
+    public AuditEntity getAudit() {
+        return audit;
     }
 
-    public void setNonconformity(NonconformityEntity nonconformity) {
-        this.nonconformity = nonconformity;
+    public void setAudit(AuditEntity audit) {
+        this.audit = audit;
     }
 
     @ManyToOne

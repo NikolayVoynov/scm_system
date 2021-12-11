@@ -6,7 +6,7 @@ import com.example.scm_system.model.view.CommentViewModel;
 import java.util.List;
 
 public interface CommentService {
-    List<CommentViewModel> getComments(Long nonconformityId);
+    List<CommentViewModel> getComments(Long auditId);
 
     CommentViewModel createComment(CommentServiceModel commentServiceModel);
 }

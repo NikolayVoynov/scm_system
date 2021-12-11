@@ -20,7 +20,7 @@ public class NonconformityEntity extends BaseEntity{
     private LocalDate closureDate;
     private AuditEntity audit;
     private StatusNonconformityEnum status;
-    private List<CommentEntity> comments;
+
 
     public NonconformityEntity() {
     }
@@ -94,14 +94,5 @@ public class NonconformityEntity extends BaseEntity{
 
     public void setStatus(StatusNonconformityEnum status) {
         this.status = status;
-    }
-
-    @OneToMany(mappedBy = "nonconformity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public List<CommentEntity> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentEntity> comments) {
-        this.comments = comments;
     }
 }
