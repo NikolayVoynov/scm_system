@@ -7,13 +7,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "evidence")
-public class EvidenceEntity extends BaseEntity{
+public class EvidenceEntity extends BaseEntity {
 
     private String url;
     private String publicId;
-//    private AuditEntity audit;
-//    private SafetyReportEntity report;
-//    private NonconformityEntity nonconformity;
 
     public EvidenceEntity() {
     }
@@ -34,31 +31,4 @@ public class EvidenceEntity extends BaseEntity{
     public void setPublicId(String publicId) {
         this.publicId = publicId;
     }
-
-//    @ManyToOne
-//    public AuditEntity getAudit() {
-//        return audit;
-//    }
-//
-//    public void setAudit(AuditEntity audit) {
-//        this.audit = audit;
-//    }
-
-//    @ManyToOne
-//    public SafetyReportEntity getReport() {
-//        return report;
-//    }
-//
-//    public void setReport(SafetyReportEntity report) {
-//        this.report = report;
-//    }
-
-//    @ManyToOne
-//    public NonconformityEntity getNonconformity() {
-//        return nonconformity;
-//    }
-//
-//    public void setNonconformity(NonconformityEntity nonconformity) {
-//        this.nonconformity = nonconformity;
-//    }
 }

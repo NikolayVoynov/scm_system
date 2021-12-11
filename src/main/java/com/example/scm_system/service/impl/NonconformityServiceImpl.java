@@ -145,7 +145,7 @@ public class NonconformityServiceImpl implements NonconformityService {
     @Override
     public void deleteNonconformityWithAuditId(Long id) {
 
-        nonconformityRepository.deleteAllByAuditId(id);
+        nonconformityRepository.deleteByAuditId(id);
     }
 
     // DASHBOARD

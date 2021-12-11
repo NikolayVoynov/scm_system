@@ -19,7 +19,6 @@ public class AuditEntity extends BaseEntity{
     private Integer numberNonconformities;
     private List<NonconformityEntity> nonconformities;
     private String conclusion;
-//    private Set<EvidenceEntity> evidence;
 
 
     public AuditEntity() {
@@ -78,7 +77,7 @@ public class AuditEntity extends BaseEntity{
         this.numberNonconformities = numberNonconformities;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "audit")
     public List<NonconformityEntity> getNonconformities() {
         return nonconformities;
     }
@@ -95,13 +94,4 @@ public class AuditEntity extends BaseEntity{
     public void setConclusion(String conclusion) {
         this.conclusion = conclusion;
     }
-
-//    @OneToMany
-//    public Set<EvidenceEntity> getEvidence() {
-//        return evidence;
-//    }
-//
-//    public void setEvidence(Set<EvidenceEntity> evidence) {
-//        this.evidence = evidence;
-//    }
 }

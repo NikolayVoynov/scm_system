@@ -187,6 +187,25 @@ public class SafetyReportServiceImpl implements SafetyReportService {
         safetyReportRepository.deleteById(id);
     }
 
+    @Override
+    public List<Long> getListEvidenceIdForSafetyReport(Long id) {
+
+        SafetyReportEntity safetyReportEntity = safetyReportRepository.
+                findById(id).
+                orElseThrow(() ->
+                        new ObjectNotFoundException("User with id " + id + " not found!"));
+
+        Set<EvidenceEntity> setEvidence = safetyReportEntity.getEvidence();
+
+        List<Long> listIdEvidence = new ArrayList<>();
+
+        for (EvidenceEntity evidenceEntity : setEvidence) {
+            listIdEvidence.add(evidenceEntity.getId());
+        }
+
+        return listIdEvidence;
+    }
+
 
     // DASHBOARD
 

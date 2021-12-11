@@ -12,7 +12,7 @@ public class SafetyReportUpdateServiceModel {
     private LocalDateTime occurrenceDateTime;
     private String description;
     private StatusSafetyReportEnum status;
-//    private Set<EvidenceEntity> evidence;
+
 
 
     public Long getId() {

@@ -5,6 +5,7 @@ import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 public class SafetyReportDetailsViewModel {

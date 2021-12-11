@@ -5,6 +5,7 @@ import com.example.scm_system.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,5 +14,5 @@ public interface NonconformityRepository extends JpaRepository<NonconformityEnti
 
     List<NonconformityEntity> findByRaisedBy(UserEntity raisedBy);
 
-    void deleteAllByAuditId(Long audit_id);
+    void deleteByAuditId(Long audit_id);
 }

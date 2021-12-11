@@ -20,7 +20,6 @@ public class NonconformityEntity extends BaseEntity{
     private LocalDate closureDate;
     private AuditEntity audit;
     private StatusNonconformityEnum status;
-//    private Set<EvidenceEntity> evidence;
     private List<CommentEntity> comments;
 
     public NonconformityEntity() {
@@ -96,15 +95,6 @@ public class NonconformityEntity extends BaseEntity{
     public void setStatus(StatusNonconformityEnum status) {
         this.status = status;
     }
-
-//    @OneToMany
-//    public Set<EvidenceEntity> getEvidence() {
-//        return evidence;
-//    }
-//
-//    public void setEvidence(Set<EvidenceEntity> evidence) {
-//        this.evidence = evidence;
-//    }
 
     @OneToMany(mappedBy = "nonconformity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<CommentEntity> getComments() {

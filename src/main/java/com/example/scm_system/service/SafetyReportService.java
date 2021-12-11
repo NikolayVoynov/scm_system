@@ -21,4 +21,6 @@ public interface SafetyReportService {
     void updateSafetyReport(SafetyReportUpdateServiceModel safetyReportUpdateServiceModel);
 
     List<SafetyReportDetailsViewModel> findSafetyReports(Principal user);
+
+    List<Long> getListEvidenceIdForSafetyReport(Long id);
 }

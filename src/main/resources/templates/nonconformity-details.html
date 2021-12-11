@@ -30,7 +30,7 @@
                     <a class="btn mb-3 btn-primary" th:href="@{/nonconformities/{id}/update(id=*{id})}">Update</a>
                 </div>
                 <div class="form-group col-md-3 mb-3" th:if="*{canDelete}">
-                    <form th:action="@{/nonconformities/{id}(id=*{id})}" th:method="delete">
+                    <form th:action="@{/nonconformities/{id}/delete(id=*{id})}" th:method="delete">
                         <input type="submit" class="btn mb-3 btn-danger" value="Delete">
                     </form>
                 </div>

@@ -20,7 +20,6 @@ public class SafetyReportUpdateBindingModel {
     private MultipartFile firstEvidence;
     private MultipartFile secondEvidence;
     private MultipartFile thirdEvidence;
-//    private Set<EvidenceEntity> evidence;
 
 
     public Long getId() {

@@ -6,6 +6,7 @@ import com.example.scm_system.model.entity.enums.StatusSafetyReportEnum;
 import com.example.scm_system.model.service.SafetyReportSendServiceModel;
 import com.example.scm_system.model.service.SafetyReportUpdateServiceModel;
 import com.example.scm_system.model.view.SafetyReportDetailsViewModel;
+import com.example.scm_system.service.EvidenceService;
 import com.example.scm_system.service.SafetyReportService;
 import com.example.scm_system.service.impl.SystemUserSpring;
 import org.modelmapper.ModelMapper;
@@ -20,15 +21,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class SafetyReportsController {
 
     private final SafetyReportService safetyReportService;
+    private final EvidenceService evidenceService;
     private final ModelMapper modelMapper;
 
-    public SafetyReportsController(SafetyReportService safetyReportService, ModelMapper modelMapper) {
+    public SafetyReportsController(SafetyReportService safetyReportService, EvidenceService evidenceService, ModelMapper modelMapper) {
         this.safetyReportService = safetyReportService;
+        this.evidenceService = evidenceService;
         this.modelMapper = modelMapper;
     }
 
@@ -128,8 +132,10 @@ public class SafetyReportsController {
             throw new RuntimeException();
         }
 
+        List<Long> listEvidenceId = safetyReportService.getListEvidenceIdForSafetyReport(id);
         safetyReportService.deleteSafetyReport(id);
+        evidenceService.deleteEvidenceWithId(listEvidenceId);
 
-        return "redirect:/users/home";
+        return "redirect:/dashboard";
     }
 }

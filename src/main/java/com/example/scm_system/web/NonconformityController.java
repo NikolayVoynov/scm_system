@@ -134,14 +134,18 @@ public class NonconformityController {
 
     // DELETE
 
-    @PreAuthorize("isOwner(#id)")
-    @DeleteMapping("/nonconformities/{id}")
+    @PreAuthorize("@nonconformityServiceImpl.isOwner(#principal.name, #id)")
+    @DeleteMapping("/nonconformities/{id}/delete")
     public String deleteNonconformity(@PathVariable Long id,
                               Principal principal) {
 
+        if (!nonconformityService.isOwner(principal.getName(), id)) {
+            throw new RuntimeException();
+        }
+
         nonconformityService.deleteNonconformity(id);
 
-        return "redirect:/users/home";
+        return "redirect:/dashboard";
     }
 
 }
