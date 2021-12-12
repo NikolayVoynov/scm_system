@@ -142,11 +142,12 @@ public class AuditServiceImpl implements AuditService {
         List<Long> listNonconformitiesId = new ArrayList<>();
 
         for (NonconformityEntity nonconformity : listNonconformities) {
-            listNonconformitiesId.add(nonconformity.getId());
-        }
 
-//        auditEntity.setNonconformities(null);
-//        auditRepository.save(auditEntity);
+            if (!listNonconformitiesId.contains(nonconformity.getId())) {
+                listNonconformitiesId.add(nonconformity.getId());
+            }
+
+        }
 
         return listNonconformitiesId;
     }

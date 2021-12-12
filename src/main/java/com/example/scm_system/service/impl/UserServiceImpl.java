@@ -130,6 +130,8 @@ public class UserServiceImpl implements UserService {
         if (userRepository.count() == 0) {
             RoleEntity adminRole = roleRepository.findByRole(RoleEnum.ADMIN);
             RoleEntity userRole = roleRepository.findByRole(RoleEnum.USER);
+//            MultipartFile multipartFile =
+//            ProfilePhotoEntity profilePhoto = createProfilePhotoEntity();
 
             UserEntity admin = new UserEntity();
             admin.setUsername("admin");
