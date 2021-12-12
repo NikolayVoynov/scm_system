@@ -19,12 +19,12 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-public class CommentsController {
+public class CommentsRestController {
 
     private final CommentService commentService;
     private final ModelMapper modelMapper;
 
-    public CommentsController(CommentService commentService, ModelMapper modelMapper) {
+    public CommentsRestController(CommentService commentService, ModelMapper modelMapper) {
         this.commentService = commentService;
         this.modelMapper = modelMapper;
     }
