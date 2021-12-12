@@ -5,6 +5,8 @@
 <body>
 <header th:replace="fragments/commons::navbar"></header>
 <main>
+    <input type="hidden" name="auditId" id="auditId" th:value="${audit.id}">
+
     <div class="container-fluid">
         <h2 class="text-center mt-2"><span class="badge badge-dark">Audit Report Details</span></h2>
         <hr class="hr-3 col-md-4 bg-white"/>

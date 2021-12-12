@@ -1,9 +1,6 @@
 package com.example.scm_system.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -38,7 +35,7 @@ public class CommentEntity extends BaseEntity {
         this.created = created;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     public String getContent() {
         return content;
     }

@@ -49,7 +49,7 @@ public class CommentsController {
         CommentViewModel commentViewModel = commentService.createComment(commentServiceModel);
 
         URI locationOfComment =
-                URI.create(String.format("restapi/%s/comments/%s", auditId, commentViewModel.getCommentId()));
+                URI.create(String.format("/restapi/%s/comments/%s", auditId, commentViewModel.getCommentId()));
 
         return ResponseEntity.
                 created(locationOfComment).

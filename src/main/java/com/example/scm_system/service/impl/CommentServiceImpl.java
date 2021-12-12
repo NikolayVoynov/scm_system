@@ -78,6 +78,7 @@ public class CommentServiceImpl implements CommentService {
         return mapsAsComment(savedComment);
     }
 
+
     private CommentViewModel mapsAsComment(CommentEntity commentEntity) {
         CommentViewModel commentViewModel = new CommentViewModel();
 
@@ -89,5 +90,11 @@ public class CommentServiceImpl implements CommentService {
         commentViewModel.setCanDelete(true);
 
         return commentViewModel;
+    }
+
+    @Override
+    public void deleteCommentsWithAuditId(Long auditId) {
+
+        commentRepository.deleteByAuditId(auditId);
     }
 }

@@ -8,6 +8,7 @@ import com.example.scm_system.model.service.AuditAddServiceModel;
 import com.example.scm_system.model.service.AuditUpdateServiceModel;
 import com.example.scm_system.model.view.AuditDetailsViewModel;
 import com.example.scm_system.service.AuditService;
+import com.example.scm_system.service.CommentService;
 import com.example.scm_system.service.NonconformityService;
 import com.example.scm_system.service.impl.SystemUserSpring;
 import org.modelmapper.ModelMapper;
@@ -27,13 +28,15 @@ public class AuditsController {
 
     private final NonconformityService nonconformityService;
     private final AuditService auditService;
+    private final CommentService commentService;
     private final ModelMapper modelMapper;
 
     public AuditsController(NonconformityService nonconformityService,
                             AuditService auditService,
-                            ModelMapper modelMapper) {
+                            CommentService commentService, ModelMapper modelMapper) {
         this.nonconformityService = nonconformityService;
         this.auditService = auditService;
+        this.commentService = commentService;
         this.modelMapper = modelMapper;
     }
 
@@ -137,6 +140,7 @@ public class AuditsController {
         }
 
         nonconformityService.deleteNonconformityWithAuditId(id);
+        commentService.deleteCommentsWithAuditId(id);
         auditService.deleteAudit(id);
 
         return "redirect:/dashboard";
