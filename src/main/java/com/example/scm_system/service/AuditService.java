@@ -23,6 +23,4 @@ public interface AuditService {
     List<AuditNonconformityViewModel> getAllAudits();
 
     List<AuditDetailsViewModel> findAudits(Principal user);
-
-    List<Long> getListNonconformitiesIdForAuditId(Long auditId);
 }

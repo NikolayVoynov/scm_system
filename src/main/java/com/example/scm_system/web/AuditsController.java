@@ -141,10 +141,12 @@ public class AuditsController {
             throw new RuntimeException();
         }
 
-        List<Long> listNonconformitiesId = auditService.getListNonconformitiesIdForAuditId(id);
+
+        List<Long> listNonconformitiesId = nonconformityService.getListNonconformitiesIdForAuditId(id);
+        List<Long> listCommentsId = commentService.getListCommentsIdForAuditId(id);
 
         nonconformityService.deleteListNonconformityWithId(listNonconformitiesId);
-//        commentService.deleteCommentsWithAuditId(id);
+        commentService.deleteListCommentWithId(listCommentsId);
         auditService.deleteAudit(id);
 
         return "redirect:/dashboard";

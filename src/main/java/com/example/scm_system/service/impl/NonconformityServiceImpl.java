@@ -143,12 +143,6 @@ public class NonconformityServiceImpl implements NonconformityService {
     // DELETE AUDIT
 
     @Override
-    public void deleteNonconformityWithAuditId(Long auditId) {
-
-        nonconformityRepository.deleteByAuditId(auditId);
-    }
-
-    @Override
     public void deleteListNonconformityWithId(List<Long> listNonconformitiesId) {
 
         for (Long id : listNonconformitiesId) {
@@ -164,6 +158,19 @@ public class NonconformityServiceImpl implements NonconformityService {
             nonconformityRepository.deleteById(id);
         }
 
+    }
+
+    @Override
+    public List<Long> getListNonconformitiesIdForAuditId(Long auditId) {
+
+        List<NonconformityEntity> listNonconformities = nonconformityRepository.findByAuditId(auditId);
+        List<Long> listNonconformitiesId = new ArrayList<>();
+
+        for (NonconformityEntity nonconformity : listNonconformities) {
+            listNonconformitiesId.add(nonconformity.getId());
+        }
+
+        return listNonconformitiesId;
     }
 
     // DASHBOARD

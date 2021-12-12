@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -96,5 +97,36 @@ public class CommentServiceImpl implements CommentService {
     public void deleteCommentsWithAuditId(Long auditId) {
 
         commentRepository.deleteByAuditId(auditId);
+    }
+
+    @Override
+    public void deleteListCommentWithId(List<Long> listCommentsId) {
+
+        for (Long id : listCommentsId) {
+            CommentEntity comment = commentRepository.
+                    findById(id).
+                    orElseThrow(() -> new ObjectNotFoundException("Comment with id " + id + " not found!"));
+
+            comment.setAudit(null);
+
+            commentRepository.save(comment);
+
+            commentRepository.deleteById(id);
+        }
+
+    }
+
+    @Override
+    public List<Long> getListCommentsIdForAuditId(Long auditId) {
+
+        List<CommentEntity> listComments = commentRepository.findByAuditId(auditId);
+
+        List<Long> listCommentsId = new ArrayList<>();
+
+        for (CommentEntity comment : listComments) {
+            listCommentsId.add(comment.getId());
+        }
+
+        return listCommentsId;
     }
 }

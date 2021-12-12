@@ -21,7 +21,7 @@ public interface NonconformityService {
 
     List<NonconformityDetailsViewModel> findNonconformities(Principal user);
 
-    void deleteNonconformityWithAuditId(Long auditId);
-
     void deleteListNonconformityWithId(List<Long> listNonconformitiesId);
+
+    List<Long> getListNonconformitiesIdForAuditId(Long auditId);
 }
