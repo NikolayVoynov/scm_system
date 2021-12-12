@@ -78,7 +78,7 @@ public class AuditEntity extends BaseEntity{
         this.numberNonconformities = numberNonconformities;
     }
 
-    @OneToMany(mappedBy = "audit")
+    @OneToMany(mappedBy = "audit", fetch = FetchType.EAGER)
     public List<NonconformityEntity> getNonconformities() {
         return nonconformities;
     }

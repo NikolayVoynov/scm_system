@@ -2,6 +2,7 @@ package com.example.scm_system.service.impl;
 
 import com.example.scm_system.model.binding.AuditAddBindingModel;
 import com.example.scm_system.model.entity.AuditEntity;
+import com.example.scm_system.model.entity.NonconformityEntity;
 import com.example.scm_system.model.entity.RoleEntity;
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.entity.enums.RoleEnum;
@@ -126,6 +127,28 @@ public class AuditServiceImpl implements AuditService {
     public void deleteAudit(Long id) {
 
         auditRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Long> getListNonconformitiesIdForAuditId(Long auditId) {
+
+        AuditEntity auditEntity = auditRepository.
+                findById(auditId).
+                orElseThrow(() ->
+                        new ObjectNotFoundException("Audit with id " + auditId + " not found!"));
+
+        List<NonconformityEntity> listNonconformities = auditEntity.getNonconformities();
+
+        List<Long> listNonconformitiesId = new ArrayList<>();
+
+        for (NonconformityEntity nonconformity : listNonconformities) {
+            listNonconformitiesId.add(nonconformity.getId());
+        }
+
+//        auditEntity.setNonconformities(null);
+//        auditRepository.save(auditEntity);
+
+        return listNonconformitiesId;
     }
 
     // ADD NONCONFORMITY

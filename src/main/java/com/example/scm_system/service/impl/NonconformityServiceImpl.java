@@ -148,6 +148,24 @@ public class NonconformityServiceImpl implements NonconformityService {
         nonconformityRepository.deleteByAuditId(auditId);
     }
 
+    @Override
+    public void deleteListNonconformityWithId(List<Long> listNonconformitiesId) {
+
+        for (Long id : listNonconformitiesId) {
+            NonconformityEntity nonconformity = nonconformityRepository.
+                    findById(id).
+                    orElseThrow(() ->
+                    new ObjectNotFoundException("Nonconformity with id " + id + " not found!"));
+
+            nonconformity.setAudit(null);
+
+            nonconformityRepository.save(nonconformity);
+
+            nonconformityRepository.deleteById(id);
+        }
+
+    }
+
     // DASHBOARD
 
     @Override

@@ -2,6 +2,7 @@ package com.example.scm_system.web;
 
 import com.example.scm_system.model.binding.AuditAddBindingModel;
 import com.example.scm_system.model.binding.AuditUpdateBindingModel;
+import com.example.scm_system.model.entity.AuditEntity;
 import com.example.scm_system.model.entity.enums.DepartmentEnum;
 import com.example.scm_system.model.entity.enums.StatusAuditEnum;
 import com.example.scm_system.model.service.AuditAddServiceModel;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class AuditsController {
@@ -139,8 +141,10 @@ public class AuditsController {
             throw new RuntimeException();
         }
 
-        nonconformityService.deleteNonconformityWithAuditId(id);
-        commentService.deleteCommentsWithAuditId(id);
+        List<Long> listNonconformitiesId = auditService.getListNonconformitiesIdForAuditId(id);
+
+        nonconformityService.deleteListNonconformityWithId(listNonconformitiesId);
+//        commentService.deleteCommentsWithAuditId(id);
         auditService.deleteAudit(id);
 
         return "redirect:/dashboard";
