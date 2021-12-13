@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
 
-    private int authorizedRequests;
-    private int anonymousRequests;
+    private int authorizedRequests, anonymousRequests;
 
     @Override
     public void onRequest() {
