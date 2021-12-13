@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navbar"></header>
+<main>
+
+    <div class="container bg-blur rounded mt-5">
+        <h1>SCM System Statistics</h1>
+        <hr class="my-3 bg-white w-50"/>
+        <p class="h4">Total requests: <th:block th:text="${statistics.getTotalRequests()}"></th:block></p>
+        <p class="h4">Authorized requests: <th:block th:text="${statistics.getAuthorizedRequests()}"></th:block></p>
+        <p class="h4">Anonymous requests: <th:block th:text="${statistics.getAnonymousRequests()}"></th:block></p>
+    </div>
+
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
