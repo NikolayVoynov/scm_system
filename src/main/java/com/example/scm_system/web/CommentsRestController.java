@@ -7,6 +7,7 @@ import com.example.scm_system.model.view.CommentViewModel;
 import com.example.scm_system.service.CommentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class CommentsRestController {
@@ -36,15 +38,17 @@ public class CommentsRestController {
         return ResponseEntity.ok(commentService.getComments(auditId));
     }
 
-    @PostMapping("/restapi/{auditId}/comments")
+    @PostMapping(value = "/restapi/{auditId}/comments",
+    consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity<CommentViewModel> postComment(@AuthenticationPrincipal UserDetails principal,
                                                         @PathVariable Long auditId,
-                                                        @RequestBody @Valid CommentBindingModel commentBindingModel) {
+                                                        @RequestParam Map<String, String> requestParams) {
 
         CommentServiceModel commentServiceModel =
-                modelMapper.map(commentBindingModel, CommentServiceModel.class);
+                modelMapper.map("", CommentServiceModel.class);
         commentServiceModel.setCreator(principal.getUsername());
         commentServiceModel.setAuditId(auditId);
+        commentServiceModel.setMessage(requestParams.get("message"));
 
         CommentViewModel commentViewModel = commentService.createComment(commentServiceModel);
 

@@ -17,7 +17,6 @@ public class AuditUpdateBindingModel {
     private StatusAuditEnum status;
     private Integer numberNonconformities;
     private String conclusion;
-//    private Set<EvidenceEntity> evidence;
 
 
     public Long getId() {

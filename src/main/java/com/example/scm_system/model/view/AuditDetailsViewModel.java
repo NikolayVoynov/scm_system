@@ -16,9 +16,7 @@ public class AuditDetailsViewModel {
     private String performedBy;
     private StatusAuditEnum status;
     private Integer numberNonconformities;
-    //    private Set<NonconformityEntity> nonconformities;
     private String conclusion;
-    //    private Set<EvidenceEntity> evidence;
     private boolean canDelete;
 
     public AuditDetailsViewModel() {

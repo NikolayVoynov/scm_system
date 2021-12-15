@@ -19,7 +19,6 @@ public class SafetyReportUpdateBindingModel {
     private StatusSafetyReportEnum status;
     private MultipartFile firstEvidence;
     private MultipartFile secondEvidence;
-    private MultipartFile thirdEvidence;
 
 
     public Long getId() {
@@ -80,13 +79,5 @@ public class SafetyReportUpdateBindingModel {
 
     public void setSecondEvidence(MultipartFile secondEvidence) {
         this.secondEvidence = secondEvidence;
-    }
-
-    public MultipartFile getThirdEvidence() {
-        return thirdEvidence;
-    }
-
-    public void setThirdEvidence(MultipartFile thirdEvidence) {
-        this.thirdEvidence = thirdEvidence;
     }
 }

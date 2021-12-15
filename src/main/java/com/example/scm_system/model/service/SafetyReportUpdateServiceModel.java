@@ -14,7 +14,6 @@ public class SafetyReportUpdateServiceModel {
     private StatusSafetyReportEnum status;
 
 
-
     public Long getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package com.example.scm_system.web.interceptor;
+package com.example.scm_system.web.interceptors;
 
 import com.example.scm_system.service.StatisticsService;
 import org.springframework.stereotype.Component;

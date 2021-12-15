@@ -53,7 +53,6 @@ public class SafetyReportServiceImpl implements SafetyReportService {
 
         EvidenceEntity firstSavedEvidence = null;
         EvidenceEntity secondSavedEvidence = null;
-        EvidenceEntity thirdSavedEvidence = null;
 
         if (safetyReportSendBindingModel.getFirstEvidence() != null) {
             EvidenceEntity firstEvidence = createEvidenceEntity(safetyReportSendBindingModel.getFirstEvidence());
@@ -71,18 +70,9 @@ public class SafetyReportServiceImpl implements SafetyReportService {
                     new ObjectNotFoundException("Second evidence not found!"));
         }
 
-        if (safetyReportSendBindingModel.getThirdEvidence() != null) {
-            EvidenceEntity thirdEvidence = createEvidenceEntity(safetyReportSendBindingModel.getThirdEvidence());
-            evidenceRepository.save(thirdEvidence);
-
-            thirdSavedEvidence = evidenceRepository.findByUrl(thirdEvidence.getUrl()).orElseThrow(() ->
-                    new ObjectNotFoundException("Third evidence not found!"));
-        }
-
         List<EvidenceEntity> listEvidence = new ArrayList<>();
         listEvidence.add(firstSavedEvidence);
         listEvidence.add(secondSavedEvidence);
-        listEvidence.add(thirdSavedEvidence);
 
         Set<EvidenceEntity> setOfEvidence = new HashSet<>();
 
