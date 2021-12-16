@@ -68,7 +68,7 @@ public class SafetyReportEntity extends BaseEntity {
         this.status = status;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     public Set<EvidenceEntity> getEvidence() {
         return evidence;
     }
