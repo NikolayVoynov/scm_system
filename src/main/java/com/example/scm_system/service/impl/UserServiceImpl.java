@@ -15,7 +15,9 @@ import com.example.scm_system.service.CloudinaryImage;
 import com.example.scm_system.service.CloudinaryService;
 import com.example.scm_system.service.UserService;
 import com.example.scm_system.service.exceptions.ObjectNotFoundException;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -126,12 +131,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void initializeAdmin() {
+    public void initializeAdmin() throws IOException {
         if (userRepository.count() == 0) {
             RoleEntity adminRole = roleRepository.findByRole(RoleEnum.ADMIN);
             RoleEntity userRole = roleRepository.findByRole(RoleEnum.USER);
-//            MultipartFile multipartFile =
-//            ProfilePhotoEntity profilePhoto = createProfilePhotoEntity();
+
+            MultipartFile multipartFile = new MockMultipartFile("blank-profile-picture.png",
+                    new FileInputStream(new File("src/main/resources/static/img/blank-profile-picture.png")));
+
+            ProfilePhotoEntity profilePhotoEntity = createProfilePhotoEntity(multipartFile);
+            profilePhotoRepository.save(profilePhotoEntity);
+            ProfilePhotoEntity savedProfilePhotoEntity = profilePhotoRepository.findByUrl(profilePhotoEntity.getUrl());
+
 
             UserEntity admin = new UserEntity();
             admin.setUsername("admin");
@@ -142,6 +153,7 @@ public class UserServiceImpl implements UserService {
             admin.setEmail("administrator@ascs.com");
             admin.setCompanyPosition("Administrator");
             admin.setRoles(Set.of(adminRole, userRole));
+            admin.setProfilePhoto(savedProfilePhotoEntity);
 
             userRepository.save(admin);
 

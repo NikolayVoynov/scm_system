@@ -50,7 +50,7 @@ public class SafetyReportEntity extends BaseEntity {
         this.occurrenceDateTime = occurrenceDateTime;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     public String getDescription() {
         return description;
     }
@@ -68,7 +68,7 @@ public class SafetyReportEntity extends BaseEntity {
         this.status = status;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     public Set<EvidenceEntity> getEvidence() {
         return evidence;
     }

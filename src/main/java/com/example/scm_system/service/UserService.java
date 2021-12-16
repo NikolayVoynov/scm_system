@@ -5,6 +5,7 @@ import com.example.scm_system.model.service.UserUpdateRoleServiceModel;
 import com.example.scm_system.model.view.UserProfileViewModel;
 import com.example.scm_system.model.view.UserUpdateRoleViewModel;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface UserService {
 
     void updateUserRole(UserUpdateRoleServiceModel userUpdateRoleServiceModel);
 
-    void initializeAdmin();
+    void initializeAdmin() throws IOException;
 
     UserProfileViewModel findByUsername(String currentUser);
 }

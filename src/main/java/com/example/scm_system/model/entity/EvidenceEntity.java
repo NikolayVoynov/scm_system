@@ -1,9 +1,6 @@
 package com.example.scm_system.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "evidence")
@@ -15,7 +12,7 @@ public class EvidenceEntity extends BaseEntity {
     public EvidenceEntity() {
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     public String getUrl() {
         return url;
     }
@@ -24,6 +21,7 @@ public class EvidenceEntity extends BaseEntity {
         this.url = url;
     }
 
+    @Lob
     public String getPublicId() {
         return publicId;
     }

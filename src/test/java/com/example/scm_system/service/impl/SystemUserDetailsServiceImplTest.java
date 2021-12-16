@@ -13,14 +13,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @ExtendWith(MockitoExtension.class)
-public class SystemUserDetailsServiceImplTest {
+class SystemUserDetailsServiceImplTest {
 
     private UserEntity testUser;
     private RoleEntity adminRole;

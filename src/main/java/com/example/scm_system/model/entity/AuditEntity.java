@@ -78,7 +78,7 @@ public class AuditEntity extends BaseEntity{
         this.numberNonconformities = numberNonconformities;
     }
 
-    @OneToMany(mappedBy = "audit", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "audit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<NonconformityEntity> getNonconformities() {
         return nonconformities;
     }
@@ -96,7 +96,7 @@ public class AuditEntity extends BaseEntity{
         this.comments = comments;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     public String getConclusion() {
         return conclusion;
     }

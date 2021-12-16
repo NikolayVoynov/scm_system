@@ -34,7 +34,7 @@ public class NonconformityEntity extends BaseEntity{
         this.refNumber = refNumber;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     public String getDescription() {
         return description;
     }
