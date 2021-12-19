@@ -5,10 +5,10 @@
 <header th:replace="fragments/commons::navbar"></header>
 <main>
     <h2 class="text-center mt-2"><span class="badge badge-dark">Profile</span></h2>
-    <hr class="hr-3 col-md-3 bg-white"/>
-    <form class="mx-auto col-md-3 justify-content-center bg-blur rounded"
+    <hr class="hr-3 col-3 bg-white"/>
+    <form class="mx-auto col-3 justify-content-center bg-blur rounded"
           th:object="${userProfile}">
-        <div class="card bg-dark" style="width: 24rem;">
+        <div class="card bg-dark" style="width: auto;">
             <div class="text-center"><img th:src="*{profilePhoto.url}" class="card-img-top rounded-circle" alt="profilePhoto"></div>
             <div class="card-body border-white">
                 <h5 class="card-title" th:text="|Full name: *{firstName} *{lastName}|">Full name</h5>

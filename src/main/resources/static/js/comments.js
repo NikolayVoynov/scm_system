@@ -31,6 +31,7 @@ async function handleCommentSubmit(event) {
         commentsCtnr.insertAdjacentHTML("afterbegin", asComment(responseData));
 
         form.reset();
+        // window.location.href = 'http://localhost:8080/audits/2/details';
     } catch (error) {
 
         let errorObj = JSON.parse(error.message);
@@ -73,6 +74,7 @@ async function postFormDataAsJson({url, formData}) {
         throw new Error(errorMessage);
     }
 
+    // location.href = 'http://localhost:8080/audits/2/details';
     return response.json();
 }
 

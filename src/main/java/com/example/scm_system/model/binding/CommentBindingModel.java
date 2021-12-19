@@ -8,7 +8,7 @@ public class CommentBindingModel {
     private String message;
 
     @NotBlank
-    @Size(min = 5)
+    @Size(min = 1)
     public String getMessage() {
         return message;
     }

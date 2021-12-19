@@ -18,7 +18,7 @@ public interface UserService {
 
     void updateUserRole(UserUpdateRoleServiceModel userUpdateRoleServiceModel);
 
-    void initializeAdmin() throws IOException;
+//    void initializeAdmin() throws IOException;
 
     UserProfileViewModel findByUsername(String currentUser);
 }

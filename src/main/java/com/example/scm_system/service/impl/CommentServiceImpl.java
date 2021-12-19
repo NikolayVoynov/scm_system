@@ -2,7 +2,6 @@ package com.example.scm_system.service.impl;
 
 import com.example.scm_system.model.entity.AuditEntity;
 import com.example.scm_system.model.entity.CommentEntity;
-import com.example.scm_system.model.entity.NonconformityEntity;
 import com.example.scm_system.model.entity.UserEntity;
 import com.example.scm_system.model.service.CommentServiceModel;
 import com.example.scm_system.model.view.CommentViewModel;

@@ -38,17 +38,19 @@ public class CommentsRestController {
         return ResponseEntity.ok(commentService.getComments(auditId));
     }
 
-    @PostMapping(value = "/restapi/{auditId}/comments",
-    consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/restapi/{auditId}/comments"
+//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
     public ResponseEntity<CommentViewModel> postComment(@AuthenticationPrincipal UserDetails principal,
                                                         @PathVariable Long auditId,
-                                                        @RequestParam Map<String, String> requestParams) {
+                                                        @Valid CommentBindingModel commentBindingModel) {
 
         CommentServiceModel commentServiceModel =
-                modelMapper.map("", CommentServiceModel.class);
+                modelMapper.map(commentBindingModel, CommentServiceModel.class);
         commentServiceModel.setCreator(principal.getUsername());
         commentServiceModel.setAuditId(auditId);
-        commentServiceModel.setMessage(requestParams.get("message"));
+//        commentServiceModel.setMessage(requestParams.get("message"));
+        commentServiceModel.setMessage(commentBindingModel.getMessage());
 
         CommentViewModel commentViewModel = commentService.createComment(commentServiceModel);
 

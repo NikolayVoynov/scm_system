@@ -63,7 +63,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel) throws IOException {
 
-        RoleEntity roleEntity = roleRepository.findByRole(RoleEnum.USER);
+        if (userRepository.count() == 0) {
+            RoleEntity roleEntity = roleRepository.findByRole(RoleEnum.ADMIN);
+
+            registerDependingOnRole(userRegistrationServiceModel, roleEntity);
+        } else {
+            RoleEntity roleEntity = roleRepository.findByRole(RoleEnum.USER);
+
+            registerDependingOnRole(userRegistrationServiceModel, roleEntity);
+        }
+    }
+
+    private void registerDependingOnRole(UserRegistrationServiceModel userRegistrationServiceModel,
+                                         RoleEntity roleEntity) throws IOException {
 
         ProfilePhotoEntity profilePhotoEntity = createProfilePhotoEntity(userRegistrationServiceModel.getProfilePhoto());
         profilePhotoRepository.save(profilePhotoEntity);
@@ -90,8 +102,8 @@ public class UserServiceImpl implements UserService {
                 new UsernamePasswordAuthenticationToken(principal, newUser.getPassword(), principal.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
     }
+
 
     private ProfilePhotoEntity createProfilePhotoEntity(MultipartFile profilePhoto) throws IOException {
         CloudinaryImage uploaded = cloudinaryService.upload(profilePhoto);
@@ -110,8 +122,6 @@ public class UserServiceImpl implements UserService {
                 stream().
                 map(userEntity -> modelMapper.map(userEntity, UserUpdateRoleViewModel.class)).
                 collect(Collectors.toList());
-
-
     }
 
     @Override
@@ -128,36 +138,6 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.save(currentUserEntity);
-    }
-
-    @Override
-    public void initializeAdmin() throws IOException {
-        if (userRepository.count() == 0) {
-            RoleEntity adminRole = roleRepository.findByRole(RoleEnum.ADMIN);
-            RoleEntity userRole = roleRepository.findByRole(RoleEnum.USER);
-
-            MultipartFile multipartFile = new MockMultipartFile("blank-profile-picture.png",
-                    new FileInputStream(new File("src/main/resources/static/img/blank-profile-picture.png")));
-
-            ProfilePhotoEntity profilePhotoEntity = createProfilePhotoEntity(multipartFile);
-            profilePhotoRepository.save(profilePhotoEntity);
-            ProfilePhotoEntity savedProfilePhotoEntity = profilePhotoRepository.findByUrl(profilePhotoEntity.getUrl());
-
-
-            UserEntity admin = new UserEntity();
-            admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode("admin"));
-            admin.setFirstName("Admin");
-            admin.setLastName("Adminov");
-            admin.setActive(true);
-            admin.setEmail("administrator@ascs.com");
-            admin.setCompanyPosition("Administrator");
-            admin.setRoles(Set.of(adminRole, userRole));
-            admin.setProfilePhoto(savedProfilePhotoEntity);
-
-            userRepository.save(admin);
-
-        }
     }
 
     @Override
