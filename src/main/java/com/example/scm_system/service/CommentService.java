@@ -10,8 +10,6 @@ public interface CommentService {
 
     CommentViewModel createComment(CommentServiceModel commentServiceModel);
 
-    void deleteCommentsWithAuditId(Long auditId);
-
     void deleteListCommentWithId(List<Long> listCommentsId);
 
     List<Long> getListCommentsIdForAuditId(Long auditId);

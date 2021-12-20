@@ -14,7 +14,7 @@ public class SystemScheduler {
     private static final Logger logger = LoggerFactory.getLogger(SystemScheduler.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron = "0 45 9,15 * * *")
+    @Scheduled(cron = "0 45 10,20 * * *")
     public void currentTime() {
         logger.info("Aviation Safety & Compliance Solutions system cron scheduler: Current Time = {}", dateFormat.format(new Date()));
     }

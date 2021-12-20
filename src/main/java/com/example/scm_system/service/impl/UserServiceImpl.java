@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService {
     private void registerDependingOnRole(UserRegistrationServiceModel userRegistrationServiceModel,
                                          RoleEntity roleEntity) throws IOException {
 
+
         ProfilePhotoEntity profilePhotoEntity = createProfilePhotoEntity(userRegistrationServiceModel.getProfilePhoto());
         profilePhotoRepository.save(profilePhotoEntity);
         ProfilePhotoEntity savedProfilePhotoEntity = profilePhotoRepository.findByUrl(profilePhotoEntity.getUrl());
@@ -122,6 +123,8 @@ public class UserServiceImpl implements UserService {
                 stream().
                 map(userEntity -> modelMapper.map(userEntity, UserUpdateRoleViewModel.class)).
                 collect(Collectors.toList());
+
+
     }
 
     @Override

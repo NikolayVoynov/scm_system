@@ -12,7 +12,6 @@ public class ProfilePhotoEntity extends BaseEntity {
     public ProfilePhotoEntity() {
     }
 
-
     @Lob
     public String getUrl() {
         return url;

@@ -9,17 +9,15 @@ import org.springframework.stereotype.Component;
 public class DBInit implements CommandLineRunner {
 
     private final RoleService roleService;
-//    private final UserService userService;
 
     public DBInit(RoleService roleService) {
         this.roleService = roleService;
-//        this.userService = userService;
     }
 
 
     @Override
     public void run(String... args) throws Exception {
         roleService.initializeRoles();
-//        userService.initializeAdmin();
+
     }
 }

@@ -14,7 +14,5 @@ public interface NonconformityRepository extends JpaRepository<NonconformityEnti
 
     List<NonconformityEntity> findByRaisedBy(UserEntity raisedBy);
 
-    void deleteByAuditId(Long audit_id);
-
     List<NonconformityEntity> findByAuditId(Long auditId);
 }

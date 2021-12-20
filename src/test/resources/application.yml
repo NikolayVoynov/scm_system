@@ -5,3 +5,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
+
+#Cloudinary Properties
+cloudinary:
+  api-key: 245815474733277
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: nikolay-voynov
