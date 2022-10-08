@@ -3,7 +3,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/scm_system?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: root
-    password: Eleanor#1967
+    password: ************
   servlet:
     multipart:
       max-file-size: 10MB
